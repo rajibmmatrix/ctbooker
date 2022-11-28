@@ -1,31 +1,66 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {StackScreenProps} from 'types';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  View,
+  Dimensions,
+} from 'react-native';
+import {Container, Text} from '~components';
+import {Icons, IMAGES} from '~constants';
+import {useTranslations} from '~translation';
 import SignupScreen from './Signup';
 import LoginScreen from './Login';
+import {StackScreenProps} from 'types';
+import {COLORS, _styles} from '~styles';
 
-export default function AuthScreen({navigation}: StackScreenProps<'Auth'>) {
+const {height} = Dimensions.get('window');
+
+export default function AuthScreen({}: StackScreenProps<'Auth'>) {
+  const tralation = useTranslations();
   const [showLogin, setShowLogin] = useState(true);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Auth Screen</Text>
-      <Button title="Forgot" onPress={() => navigation.navigate('Forgot')} />
-      <Button title="Change" onPress={() => setShowLogin(prev => !prev)} />
-      {showLogin ? <LoginScreen /> : <SignupScreen />}
-    </View>
+    <Container>
+      <ScrollView
+        style={[_styles.container]}
+        showsVerticalScrollIndicator={false}>
+        <ImageBackground source={IMAGES.Background} style={styles.container}>
+          <Icons.Logo width={138} height={138} style={styles.logo} />
+          <Text style={[_styles.subHeader, styles.title]}>
+            {tralation.login_title}
+          </Text>
+          <View style={styles.body}>
+            {showLogin ? (
+              <LoginScreen onMove={() => setShowLogin(false)} />
+            ) : (
+              <SignupScreen onMove={() => setShowLogin(true)} />
+            )}
+          </View>
+        </ImageBackground>
+      </ScrollView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    paddingTop: 76,
+    paddingBottom: 190 + 30,
+    paddingHorizontal: 28,
+    minHeight: height,
+  },
+  logo: {
+    alignSelf: 'center',
+    marginBottom: 22,
   },
   title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#000000',
+    textAlign: 'center',
+    marginBottom: 38,
+    color: COLORS.Light,
+  },
+  body: {
+    flex: 1,
   },
 });

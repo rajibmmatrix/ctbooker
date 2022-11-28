@@ -10,6 +10,7 @@ const config = {
 
 const development: CONFIG = {
   ...config,
+  lang: 'en',
   mode: 'Development',
   version: '0.0.1',
   baseURL: '',
@@ -17,6 +18,7 @@ const development: CONFIG = {
 
 const production: CONFIG = {
   ...config,
+  lang: 'fr',
   mode: 'Production',
   version: '0.0.1',
   baseURL: '',

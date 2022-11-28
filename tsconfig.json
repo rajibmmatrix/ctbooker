@@ -19,8 +19,9 @@
       "~screens": ["src/screens/index"],
       "~services": ["src/services/index"],
       "~styles": ["src/styles/index"],
+      "~translation": ["src/translation/index"],
       "~utils": ["src/utils/index"],
-      "~src": ["src/*"],
+      "~src/*": ["src/*"],
     },
   }
 }

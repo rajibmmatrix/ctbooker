@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TOKEN_LOCATION = '@token';
-const ISLOGIN = '@isLogedin';
+const SET_LANG = '@lang';
 
 export const getToken = async (): Promise<string | null> => {
   try {
@@ -34,24 +34,27 @@ export const deleteToken = async (): Promise<boolean> => {
   }
 };
 
-//For handel login state
-export const getLogin = async (): Promise<boolean> => {
+export enum LType {
+  'en',
+  'fn',
+}
+
+//For handel language state
+export const getLang = async (): Promise<LType | null> => {
   try {
-    const isLogin = await AsyncStorage.getItem(ISLOGIN);
-    return isLogin != null ? JSON.parse(isLogin) : false;
+    const lang = await AsyncStorage.getItem(SET_LANG);
+    return lang != null ? JSON.parse(lang) : null;
   } catch (e) {
-    console.log(e);
-    return false;
+    return null;
   }
 };
 
-export const setLogin = async (value: boolean): Promise<boolean> => {
+export const setLang = async (value: LType): Promise<boolean> => {
   try {
     const data = JSON.stringify(value);
-    await AsyncStorage.setItem(ISLOGIN, data);
+    await AsyncStorage.setItem(SET_LANG, data);
     return true;
   } catch (e) {
-    console.log(e);
     return false;
   }
 };

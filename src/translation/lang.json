@@ -1,0 +1,34 @@
+{
+    "fn": {
+        "login_title": "Inscrivez-vous pour une expérience unique",
+        "email": "E-mail",
+        "password": "Mot de passe",
+        "forgot_password": "mot de passe oublié?",
+        "login_tab": "S'identifier",
+        "signup_tab": "Inscrivez-vous",
+        "login_button": "S’identifier",
+        "signup_button": "Inscrivez-vous",
+        "termes_and_conditions": "Termes et conditions",
+        "individual_btn": "Particulier",
+        "profesonal_btn": "Professionnel",
+        "fname": "Prenom",
+        "lname": "Nom",
+        "create_password": "Créer un mot de passe"
+    },
+    "en": {
+        "login_title": "Sign up for a unique experience",
+        "email": "Email",
+        "password": "Password",
+        "forgot_password": "Forgot your password?",
+        "login_tab": "Login",
+        "signup_tab": "Sign up",
+        "login_button": "Login",
+        "signup_button": "Sign up",
+        "termes_and_conditions": "Terms and conditions",
+        "individual_btn": "Particular",
+        "profesonal_btn": "Professional",
+        "fname": "First name",
+        "lname": "Last name",
+        "create_password": "Create a password"
+    }
+}

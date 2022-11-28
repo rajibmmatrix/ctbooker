@@ -66,9 +66,12 @@ export type TabScreenProps<Screen extends keyof TabParamList> =
 
 type MODE = 'Production' | 'Development';
 
+export type ILANG = 'en' | 'fr';
+
 export interface CONFIG {
   name: string;
   mode: MODE;
+  lang: ILANG;
   version: string;
   baseURL: string;
   termsURL: string;
@@ -92,4 +95,21 @@ export interface IVerify {
 export interface ISignup {
   full_name: string;
   email: string;
+}
+
+export interface ITranslation {
+  login_title: string;
+  email: string;
+  password: string;
+  forgot_password: string;
+  login_tab: string;
+  signup_tab: string;
+  login_button: string;
+  signup_button: string;
+  termes_and_conditions: string;
+  individual_btn: string;
+  profesonal_btn: string;
+  fname: string;
+  lname: string;
+  create_password: string;
 }
