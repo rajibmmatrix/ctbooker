@@ -1,14 +1,15 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import {
   ImageBackground,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {IMAGES} from '~constants';
-import {COLORS, _styles} from '~styles';
+import {useNavigation, CommonActions} from '@react-navigation/native';
+import {Button, Input, Text} from '~common';
+import {Icons, IMAGES} from '~constants';
+import {COLORS, FONTS, _styles} from '~styles';
 import {useTranslations} from '~translation';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const LoginScreen: FC<Props> = ({onMove}) => {
+  const navigation = useNavigation();
   const tralation = useTranslations();
 
   const selectedColor = [
@@ -57,18 +59,46 @@ const LoginScreen: FC<Props> = ({onMove}) => {
         </LinearGradient>
       </View>
       <View style={styles.body}>
-        <Text>Login Screen</Text>
+        <Input
+          title={tralation.email}
+          Icon={Icons.User}
+          placeholder={tralation.email}
+          autoComplete="email"
+          autoCapitalize="none"
+        />
+        <Input
+          title={tralation.password}
+          Icon={Icons.Lock}
+          placeholder={tralation.password}
+          secureTextEntry={true}
+        />
+        <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+          <Text style={[_styles.link, styles.link]}>
+            {tralation.forgot_password}
+          </Text>
+        </TouchableOpacity>
+        <View style={styles.footerButton}>
+          <Button
+            title={tralation.login_button}
+            onPress={() => {
+              navigation.dispatch(
+                CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
+              );
+            }}
+          />
+        </View>
       </View>
     </ImageBackground>
   );
 };
 
-export default LoginScreen;
+export default memo(LoginScreen);
 
 const styles = StyleSheet.create({
   card: {
     padding: 10,
     width: '100%',
+    paddingBottom: 0,
     backgroundColor: 'transparent',
     height: 319 + 17,
   },
@@ -82,12 +112,14 @@ const styles = StyleSheet.create({
   },
   selectedTitle: {
     fontWeight: '700',
+    fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
     textAlign: 'center',
     paddingHorizontal: 10,
   },
   unselectedTitle: {
-    fontWeight: '500',
+    fontWeight: '300',
+    fontFamily: FONTS.Primary_Light,
     color: COLORS.Light,
     textAlign: 'center',
   },
@@ -108,5 +140,17 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
+    marginTop: 48,
+    paddingHorizontal: 30,
+  },
+  link: {
+    marginTop: -7,
+    textAlign: 'center',
+    textTransform: 'capitalize',
+  },
+  footerButton: {
+    bottom: -25,
+    position: 'absolute',
+    alignSelf: 'center',
   },
 });

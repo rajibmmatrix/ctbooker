@@ -19,22 +19,36 @@ const {height} = Dimensions.get('window');
 export default function AuthScreen({}: StackScreenProps<'Auth'>) {
   const tralation = useTranslations();
   const [showLogin, setShowLogin] = useState(true);
+  const [isSignupShow, setIsSignupShow] = useState(false);
 
   return (
     <Container>
       <ScrollView
         style={[_styles.container]}
         showsVerticalScrollIndicator={false}>
-        <ImageBackground source={IMAGES.Background} style={styles.container}>
+        <ImageBackground
+          source={IMAGES.Background}
+          style={!isSignupShow ? styles.container : styles.signupContainer}>
           <Icons.Logo width={138} height={138} style={styles.logo} />
           <Text style={[_styles.subHeader, styles.title]}>
             {tralation.login_title}
           </Text>
           <View style={styles.body}>
             {showLogin ? (
-              <LoginScreen onMove={() => setShowLogin(false)} />
+              <LoginScreen
+                onMove={() => {
+                  setShowLogin(false);
+                  setIsSignupShow(false);
+                }}
+              />
             ) : (
-              <SignupScreen onMove={() => setShowLogin(true)} />
+              <SignupScreen
+                onMove={() => {
+                  setShowLogin(true);
+                  setIsSignupShow(false);
+                }}
+                showSignup={() => setIsSignupShow(true)}
+              />
             )}
           </View>
         </ImageBackground>
@@ -47,9 +61,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 76,
-    paddingBottom: 190 + 30,
+    paddingBottom: 220,
     paddingHorizontal: 28,
     minHeight: height,
+  },
+  signupContainer: {
+    flex: 1,
+    paddingTop: 76,
+    paddingBottom: 395,
+    paddingHorizontal: 28,
+    minHeight: height + 175,
   },
   logo: {
     alignSelf: 'center',

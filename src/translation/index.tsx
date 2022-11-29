@@ -28,18 +28,26 @@ export const Translation = createContext<IContext>(language.fn);
 
 export default function TranslationProvider(props: Props) {
   const [lang, setLang] = useState<ITranslation | null>(null);
+  const [type, setType] = useState<LType>(LType.fn);
   const [isLangSet, setIsLangSet] = useState(false);
 
-  const changeLanguage = useCallback(async (value: LType) => {
-    if (value === LType.en) {
-      setLang(language.en);
-    } else if (value === LType.fn) {
-      setLang(language.fn);
-    }
-    setIsLangSet(true);
-    await storage.setLang(value);
-    RNRestart.Restart();
-  }, []);
+  const changeLanguage = useCallback(
+    async (value: LType) => {
+      if (type === value) {
+        return;
+      }
+      if (value === LType.en) {
+        setLang(language.en);
+      } else if (value === LType.fn) {
+        setLang(language.fn);
+      }
+      setType(value);
+      setIsLangSet(true);
+      await storage.setLang(value);
+      RNRestart.Restart();
+    },
+    [type],
+  );
 
   const updateLanguage = async (params: LType | null) => {
     console.log(params);
@@ -56,6 +64,7 @@ export default function TranslationProvider(props: Props) {
         setLang(language.fn);
         setIsLangSet(true);
       }
+      setType(isLang as LType);
       updateLanguage(isLang);
     })();
   }, []);

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {
   BookingResumeScreen,
@@ -15,7 +15,9 @@ const Drawer = createDrawerNavigator<SideParamList>();
 
 export default function Sidebar() {
   return (
-    <Drawer.Navigator initialRouteName="Tab">
+    <Drawer.Navigator
+      initialRouteName="Tab"
+      screenOptions={{headerShown: false}}>
       <Drawer.Screen name="Tab" component={Tabs} />
       <Drawer.Screen name="BookingResume" component={BookingResumeScreen} />
       <Drawer.Screen name="CarDocuments" component={CarDocumentsScreen} />
