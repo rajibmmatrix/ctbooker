@@ -27,7 +27,7 @@ export interface IContext extends ITranslation {
 export const Translation = createContext<IContext>(language.fn);
 
 export default function TranslationProvider(props: Props) {
-  const [lang, setLang] = useState<ITranslation | null>(null);
+  const [lang, setLang] = useState<ITranslation>(language.fn);
   const [type, setType] = useState<LType>(LType.fn);
   const [isLangSet, setIsLangSet] = useState(false);
 
@@ -57,14 +57,18 @@ export default function TranslationProvider(props: Props) {
   useEffect(() => {
     (async () => {
       const isLang = await storage.getLang();
+      setType(isLang as LType);
       if (isLang === LType.en) {
         setLang(language.en);
         setIsLangSet(true);
       } else if (isLang === LType.fn) {
         setLang(language.fn);
         setIsLangSet(true);
+      } else {
+        setType(LType.fn);
+        setLang(language.fn);
+        setIsLangSet(true);
       }
-      setType(isLang as LType);
       updateLanguage(isLang);
     })();
   }, []);
