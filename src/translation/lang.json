@@ -13,7 +13,22 @@
         "profesonal_btn": "Professionnel",
         "fname": "Prenom",
         "lname": "Nom",
-        "create_password": "Créer un mot de passe"
+        "create_password": "Créer un mot de passe",
+        "home_title": "Bienvenue",
+        "home_description": "Expert du service de voitures",
+        "booking": "Réservation",
+        "booking_title": "Booking",
+        "type_of_service": "Type de services",
+        "technical_control": "Contrôle Technique",
+        "against_visit": "Contre visite",
+        "car_repair": "Réparation automobile",
+        "vehicle_documents": "Documents du véhicule",
+        "payment": "Paiement",
+        "historical": "Historique",
+        "signout": "Se déconnecter",
+        "welcome": "Accueil",
+        "reservation": "Réservation",
+        "my_account": "Mon Compte"
     },
     "en": {
         "login_title": "Sign up for a unique experience",
@@ -29,6 +44,21 @@
         "profesonal_btn": "Professional",
         "fname": "First name",
         "lname": "Last name",
-        "create_password": "Create a password"
+        "create_password": "Create a password",
+        "home_title": "Welcome",
+        "home_description": "Car Service Expert",
+        "booking": "Reservation",
+        "booking_title": "Booking",
+        "type_of_service": "Type of service",
+        "technical_control": "Technical control",
+        "against_visit": "Against visit",
+        "car_repair": "Car repair",
+        "vehicle_documents": "Vehicle documents",
+        "payment": "Payment",
+        "historical": "Historical",
+        "signout": "Sign out",
+        "welcome": "Welcome",
+        "reservation": "Reservation",
+        "my_account": "My account"
     }
 }

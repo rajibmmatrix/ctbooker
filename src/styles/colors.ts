@@ -12,6 +12,7 @@ export const COLORS = {
   TabBar: '#0D0E10',
   Primary_Border: '#45484F',
   Secondary_Border: '#24252D',
+  Icon_Border: '#23262B',
   Primary_Button: ['#70058E', '#400251'],
   Primary_Placeholder: '#999999',
   Primary_Line: '#595D64',

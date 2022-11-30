@@ -24,22 +24,25 @@ export type StackParamList = {
   Logout: undefined;
 };
 
+export type IBooking = 'Technical Control' | 'Against Visit' | 'Car Repair';
+
 //For Side Navigations
 export type SideParamList = {
   Tab: NavigatorScreenParams<TabParamList> | undefined;
   BookingResume: undefined;
   CarDocuments: undefined;
   ChangePassword: undefined;
-  MakePayment: {id: string} | undefined;
+  MakeBooking: {type: IBooking};
   Payment: undefined;
   EditProfile: undefined;
+  Notification: undefined;
 };
 
 //For Tab Navigations
 export type TabParamList = {
   Home: undefined;
   Booking: undefined;
-  Profile: undefined;
+  Account: undefined;
 };
 
 //For Stack Screens
@@ -112,4 +115,19 @@ export interface ITranslation {
   fname: string;
   lname: string;
   create_password: string;
+  home_title: string;
+  home_description: string;
+  booking: string;
+  booking_title: string;
+  type_of_service: string;
+  technical_control: string;
+  against_visit: string;
+  car_repair: string;
+  vehicle_documents: string;
+  payment: string;
+  historical: string;
+  signout: string;
+  welcome: string;
+  reservation: string;
+  my_account: string;
 }

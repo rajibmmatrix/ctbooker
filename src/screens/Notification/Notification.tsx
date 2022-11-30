@@ -1,11 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {TabScreenProps} from 'types';
 
-export default function ProfileScreen({}: TabScreenProps<'Profile'>) {
+export default function NotificationScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile Screen</Text>
+      <Text style={styles.title}>Notification Screen</Text>
     </View>
   );
 }
@@ -15,11 +14,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
   },
   title: {
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 24,
+    textAlign: 'center',
     color: '#000000',
   },
 });

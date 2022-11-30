@@ -5,9 +5,11 @@ import {
   CarDocumentsScreen,
   ChangePasswordScreen,
   EditProfileScreen,
-  MakePaymentScreen,
+  MakeBookingScreen,
+  NotificationScreen,
   PaymentScreen,
 } from '~screens';
+import {CustomSidebar} from '~components';
 import Tabs from './TabNavigation';
 import {SideParamList} from 'types';
 
@@ -17,14 +19,19 @@ export default function Sidebar() {
   return (
     <Drawer.Navigator
       initialRouteName="Tab"
-      screenOptions={{headerShown: false}}>
+      drawerContent={props => <CustomSidebar {...props} />}
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: {backgroundColor: 'transparent'},
+      }}>
       <Drawer.Screen name="Tab" component={Tabs} />
       <Drawer.Screen name="BookingResume" component={BookingResumeScreen} />
       <Drawer.Screen name="CarDocuments" component={CarDocumentsScreen} />
       <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} />
-      <Drawer.Screen name="MakePayment" component={MakePaymentScreen} />
+      <Drawer.Screen name="MakeBooking" component={MakeBookingScreen} />
       <Drawer.Screen name="Payment" component={PaymentScreen} />
       <Drawer.Screen name="EditProfile" component={EditProfileScreen} />
+      <Drawer.Screen name="Notification" component={NotificationScreen} />
     </Drawer.Navigator>
   );
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {SideScreenProps} from 'types';
+import {TabScreenProps} from 'types';
 
-export default function MakePaymentScreen({}: SideScreenProps<'MakePayment'>) {
+export default function AccountScreen({}: TabScreenProps<'Account'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>MakePayment Screen</Text>
+      <Text style={styles.title}>Account Screen</Text>
     </View>
   );
 }
