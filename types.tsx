@@ -130,4 +130,22 @@ export interface ITranslation {
   welcome: string;
   reservation: string;
   my_account: string;
+  technical_control_title: string;
+  against_visit_title: string;
+  car_repair_title: string;
+  date_of_reservition: string;
+  date: string;
+  pickup_time: string;
+  pickup_location: string;
+  deposit_same_place: string;
+  different_deposit_location: string;
+  deposit_address: string;
+  price: string;
+  insurance_card_number: string;
+  gray_card: string;
+  valid_technical_control: string;
+  attachments: string;
+  next: string;
+  vehicle_problem: string;
+  max_characters: string;
 }

@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from './colors';
 import {FONTS} from './fonts';
 
 const styles = StyleSheet.create({
@@ -84,6 +85,17 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     lineHeight: 18,
+  },
+  bookingIcon: {
+    marginBottom: 18,
+    shadowColor: COLORS.Gray,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 10,
   },
 });
 

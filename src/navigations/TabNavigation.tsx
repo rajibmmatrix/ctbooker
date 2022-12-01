@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BookingScreen, HomeScreen, AccountScreen} from '~screens';
-import {TabParamList} from 'types';
-import {useTranslations} from '~translation';
 import {CustomBottom} from '~components';
-import {COLORS, FONTS} from '~styles';
 import {Icons} from '~constants';
+import {COLORS, FONTS, _styles} from '~styles';
+import {useTranslations} from '~translation';
+import {TabParamList} from 'types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -42,7 +42,16 @@ export default function Tabs() {
       <Tab.Screen
         name="Booking"
         component={BookingScreen}
-        options={{title: translations.reservation}}
+        options={{
+          title: translations.reservation,
+          tabBarIcon: () => (
+            <Icons.BookingTab
+              width={63}
+              height={63}
+              style={_styles.bookingIcon}
+            />
+          ),
+        }}
       />
       <Tab.Screen
         name="Account"
