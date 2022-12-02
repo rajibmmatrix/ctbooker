@@ -3,7 +3,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import TranslationProvider from './translation';
 import Navigation from './navigations';
-import {NetError} from './components';
+import {NetError, Spinner} from './components';
 import {store} from './app';
 
 export default function App() {
@@ -12,6 +12,7 @@ export default function App() {
       <TranslationProvider>
         <Provider store={store}>
           <Navigation />
+          <Spinner />
           <NetError />
         </Provider>
       </TranslationProvider>

@@ -11,12 +11,14 @@ import {Button, Input, Text} from '~common';
 import {Icons, IMAGES} from '~constants';
 import {COLORS, FONTS, _styles} from '~styles';
 import {useTranslations} from '~translation';
+import {startLoading, stopLoading, useActions} from '~app';
 
 interface Props {
   onMove: () => void;
 }
 
 const LoginScreen: FC<Props> = ({onMove}) => {
+  const dispatch = useActions();
   const navigation = useNavigation();
   const tralation = useTranslations();
 
@@ -30,6 +32,16 @@ const LoginScreen: FC<Props> = ({onMove}) => {
     COLORS.Primary_Gradient[0],
     COLORS.Primary_Gradient[1],
   ];
+
+  const handleLogin = () => {
+    dispatch(startLoading());
+    setTimeout(() => {
+      dispatch(stopLoading());
+      navigation.dispatch(
+        CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
+      );
+    }, 3000);
+  };
 
   return (
     <ImageBackground
@@ -78,14 +90,7 @@ const LoginScreen: FC<Props> = ({onMove}) => {
           </Text>
         </TouchableOpacity>
         <View style={styles.footerButton}>
-          <Button
-            title={tralation.login_button}
-            onPress={() => {
-              navigation.dispatch(
-                CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
-              );
-            }}
-          />
+          <Button title={tralation.login_button} onPress={handleLogin} />
         </View>
       </View>
     </ImageBackground>

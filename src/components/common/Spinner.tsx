@@ -1,15 +1,20 @@
 import React, {FC, memo} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
-//import {COLORS} from '~constants';
+import {useSelector} from '~app';
+import {COLORS, FONTS} from '~styles';
 
 const Spinner: FC = () => {
+  const isLoading = useSelector(state => state.loading.isLoading);
+
+  if (!isLoading) return null;
+
   return (
     <View style={styles.container}>
       <View style={styles.body}>
         <ActivityIndicator
           size="large"
           animating={true}
-          //color={COLORS.Primary}
+          color={COLORS.Primary}
         />
         <Text style={styles.title}>Loading...</Text>
       </View>
@@ -34,13 +39,14 @@ const styles = StyleSheet.create({
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    //backgroundColor: COLORS.Light,
+    backgroundColor: COLORS.Light,
     borderRadius: 10,
   },
   title: {
     fontSize: 16,
     fontWeight: '700',
-    //color: COLORS.Dark,
+    fontFamily: FONTS.Primary_Bold,
+    color: COLORS.Dark,
     marginTop: 10,
   },
 });

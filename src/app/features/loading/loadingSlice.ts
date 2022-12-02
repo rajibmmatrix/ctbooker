@@ -1,13 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {
-  checkLogin,
-  getUser,
-  login,
-  logout,
-  signup,
-  forgot,
-} from '../auth/authAction';
 
 export interface LoadingState {
   isLoading: boolean;
@@ -32,104 +24,6 @@ export const loadingSlice = createSlice({
     loading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-  },
-  extraReducers: builder => {
-    builder.addCase(login.pending, (state: LoadingState) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(login.fulfilled, (state: LoadingState) => {
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(login.rejected, (state: LoadingState, action: any) => {
-      state.isLoading = false;
-      if (action.payload) {
-        state.error = action.payload?.errorMessage;
-      } else {
-        state.error = action.error?.message as string;
-      }
-    });
-    builder.addCase(forgot.pending, (state: LoadingState) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(forgot.fulfilled, (state: LoadingState) => {
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(forgot.rejected, (state: LoadingState, action: any) => {
-      state.isLoading = false;
-      if (action.payload) {
-        state.error = action.payload?.errorMessage;
-      } else {
-        state.error = action.error?.message as string;
-      }
-    });
-    builder.addCase(signup.pending, (state: LoadingState) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(signup.fulfilled, (state: LoadingState) => {
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(signup.rejected, (state: LoadingState, action: any) => {
-      state.isLoading = false;
-      if (action.payload) {
-        state.error = action.payload?.errorMessage;
-      } else {
-        state.error = action.error?.message as string;
-      }
-    });
-    builder.addCase(getUser.pending, (state: LoadingState) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(getUser.fulfilled, (state: LoadingState) => {
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(getUser.rejected, (state: LoadingState, action: any) => {
-      state.isLoading = false;
-      if (action.payload) {
-        state.error = action.payload?.errorMessage;
-      } else {
-        state.error = action.error?.message as string;
-      }
-    });
-    builder.addCase(checkLogin.pending, (state: LoadingState) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(checkLogin.fulfilled, (state: LoadingState) => {
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(checkLogin.rejected, (state: LoadingState, action: any) => {
-      state.isLoading = false;
-      if (action.payload) {
-        state.error = action.payload?.errorMessage;
-      } else {
-        state.error = action.error?.message as string;
-      }
-    });
-    builder.addCase(logout.pending, (state: LoadingState) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(logout.fulfilled, (state: LoadingState) => {
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(logout.rejected, (state: LoadingState, action: any) => {
-      state.isLoading = false;
-      if (action.payload) {
-        state.error = action.payload?.errorMessage;
-      } else {
-        state.error = action.error?.message as string;
-      }
-    });
   },
 });
 
