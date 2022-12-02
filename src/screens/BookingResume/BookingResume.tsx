@@ -1,25 +1,57 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {BackHeader, BookingCard, Container} from '~components';
 import {SideScreenProps} from 'types';
+import {useTranslations} from '~translation';
 
 export default function BookingResumeScreen({}: SideScreenProps<'BookingResume'>) {
+  const translation = useTranslations();
+
+  const data = [
+    {
+      date: '23.11.2022',
+      type: translation.technical_control,
+      details: 'Mauris eu risus felis. Integer',
+    },
+    {
+      date: '30.11.2022',
+      type: translation.against_visit,
+      details: 'Mauris eu risus felis. Integer',
+    },
+    {
+      date: '02.12.2022',
+      type: translation.technical_control,
+      details: 'Mauris eu risus felis. Integer',
+    },
+  ];
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Booking Resume Screen</Text>
-    </View>
+    <Container>
+      <BackHeader title={translation.booking_history} />
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          renderItem={({item}) => (
+            <BookingCard
+              date={item.date}
+              type={item.type}
+              details={item.details}
+            />
+          )}
+          keyExtractor={(_, index) => index.toString()}
+          style={styles.body}
+        />
+      </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    paddingTop: 10,
   },
-  title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#000000',
+  body: {
+    flex: 1,
   },
 });

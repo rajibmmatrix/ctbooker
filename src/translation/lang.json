@@ -46,7 +46,10 @@
         "attachments": "Pièces jointes",
         "next": "Suivant",
         "vehicle_problem": "Explication du problème du véhicule",
-        "max_characters": "Max 250 caractères"
+        "max_characters": "Max 250 caractères",
+        "booking_history": "Booking history",
+        "service_type": "Type de service",
+        "car_details": "Car détails"
     },
     "en": {
         "login_title": "Sign up for a unique experience",
@@ -95,6 +98,9 @@
         "attachments": "Attachments",
         "next": "Next",
         "vehicle_problem": "Explanation of the vehicle problem",
-        "max_characters": "Max 250 characters"
+        "max_characters": "Max 250 characters",
+        "booking_history": "Booking history",
+        "service_type": "Service type",
+        "car_details": "Car details"
     }
 }

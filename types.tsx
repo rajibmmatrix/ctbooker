@@ -148,4 +148,7 @@ export interface ITranslation {
   next: string;
   vehicle_problem: string;
   max_characters: string;
+  booking_history: string;
+  service_type: string;
+  car_details: string;
 }
