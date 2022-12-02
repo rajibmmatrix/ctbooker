@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 16,
     color: COLORS.Light,
+    margin: 0,
+    padding: 0,
     marginLeft: 10,
     height: 35,
   },
