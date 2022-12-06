@@ -13,7 +13,7 @@ interface Props {
 }
 
 const BookingFileUpload: FC<Props> = ({Icon, title, onPress}) => {
-  const translations = useTranslations();
+  const {translation} = useTranslations();
 
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ const BookingFileUpload: FC<Props> = ({Icon, title, onPress}) => {
       </View>
       <TouchableOpacity onPress={onPress} style={styles.button}>
         <Icons.DirectSend />
-        <Text style={styles.buttonTitle}>{translations.attachments}</Text>
+        <Text style={styles.buttonTitle}>{translation.attachments}</Text>
       </TouchableOpacity>
     </View>
   );

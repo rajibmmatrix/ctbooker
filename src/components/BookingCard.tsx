@@ -12,7 +12,7 @@ interface Props {
 }
 
 const BookingCard: FC<Props> = ({date, type, details, onPress}) => {
-  const translation = useTranslations();
+  const {translation} = useTranslations();
 
   return (
     <TouchableOpacity

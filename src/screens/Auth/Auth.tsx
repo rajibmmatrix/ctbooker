@@ -17,7 +17,7 @@ import {COLORS, _styles} from '~styles';
 const {height} = Dimensions.get('window');
 
 export default function AuthScreen({}: StackScreenProps<'Auth'>) {
-  const tralation = useTranslations();
+  const {translation} = useTranslations();
   const [showLogin, setShowLogin] = useState(true);
   const [isSignupShow, setIsSignupShow] = useState(false);
 
@@ -31,7 +31,7 @@ export default function AuthScreen({}: StackScreenProps<'Auth'>) {
           style={!isSignupShow ? styles.container : styles.signupContainer}>
           <Icons.Logo width={138} height={138} style={styles.logo} />
           <Text style={[_styles.subHeader, styles.title]}>
-            {tralation.login_title}
+            {translation.login_title}
           </Text>
           <View style={styles.body}>
             {showLogin ? (

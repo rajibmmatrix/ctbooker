@@ -20,7 +20,7 @@ interface Props {
 const LoginScreen: FC<Props> = ({onMove}) => {
   const dispatch = useActions();
   const navigation = useNavigation();
-  const tralation = useTranslations();
+  const {translation} = useTranslations();
 
   const selectedColor = [
     COLORS.Primary_Gradient[2],
@@ -60,37 +60,37 @@ const LoginScreen: FC<Props> = ({onMove}) => {
             end={{x: 1, y: 1}}
             style={styles.selectedButton}>
             <Text style={[_styles.link, styles.selectedTitle]}>
-              {tralation.login_tab}
+              {translation.login_tab}
             </Text>
           </LinearGradient>
           <TouchableOpacity onPress={onMove} style={styles.buttonLink}>
             <Text style={[_styles.link, styles.unselectedTitle]}>
-              {tralation.signup_tab}
+              {translation.signup_tab}
             </Text>
           </TouchableOpacity>
         </LinearGradient>
       </View>
       <View style={styles.body}>
         <Input
-          title={tralation.email}
+          title={translation.email}
           Icon={Icons.User}
-          placeholder={tralation.email}
+          placeholder={translation.email}
           autoComplete="email"
           autoCapitalize="none"
         />
         <Input
-          title={tralation.password}
+          title={translation.password}
           Icon={Icons.Lock}
-          placeholder={tralation.password}
+          placeholder={translation.password}
           secureTextEntry={true}
         />
         <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
           <Text style={[_styles.link, styles.link]}>
-            {tralation.forgot_password}
+            {translation.forgot_password}
           </Text>
         </TouchableOpacity>
         <View style={styles.footerButton}>
-          <Button title={tralation.login_button} onPress={handleLogin} />
+          <Button title={translation.login_button} onPress={handleLogin} />
         </View>
       </View>
     </ImageBackground>

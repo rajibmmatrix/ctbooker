@@ -5,7 +5,7 @@ import {SideScreenProps} from 'types';
 import {useTranslations} from '~translation';
 
 export default function BookingResumeScreen({}: SideScreenProps<'BookingResume'>) {
-  const translation = useTranslations();
+  const {translation} = useTranslations();
 
   const data = [
     {

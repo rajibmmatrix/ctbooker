@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TOKEN_LOCATION = '@token';
-const SET_LANG = '@lang';
+const LANGUAGE = '@language';
 
 export const getToken = async (): Promise<string | null> => {
   try {
@@ -34,27 +34,24 @@ export const deleteToken = async (): Promise<boolean> => {
   }
 };
 
-export enum LType {
-  'en',
-  'fn',
-}
+type IType = 'fr' | 'en';
 
 //For handel language state
-export const getLang = async (): Promise<LType | null> => {
-  try {
-    const lang = await AsyncStorage.getItem(SET_LANG);
-    return lang != null ? JSON.parse(lang) : null;
-  } catch (e) {
-    return null;
-  }
-};
-
-export const setLang = async (value: LType): Promise<boolean> => {
+export const setLanguage = async (value: IType): Promise<boolean> => {
   try {
     const data = JSON.stringify(value);
-    await AsyncStorage.setItem(SET_LANG, data);
+    await AsyncStorage.setItem(LANGUAGE, data);
     return true;
   } catch (e) {
     return false;
+  }
+};
+
+export const getLanguage = async (): Promise<IType> => {
+  try {
+    const lang = await AsyncStorage.getItem(LANGUAGE);
+    return lang != null ? JSON.parse(lang) : 'fr';
+  } catch (e) {
+    return 'fr';
   }
 };

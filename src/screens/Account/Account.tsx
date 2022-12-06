@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {TabScreenProps} from 'types';
 import {Button} from '~common';
 import {COLORS} from '~styles';
-import {LType, useTranslations} from '~translation';
+import {useTranslations} from '~translation';
 
 export default function AccountScreen({}: TabScreenProps<'Account'>) {
   const translation = useTranslations();
@@ -14,12 +14,12 @@ export default function AccountScreen({}: TabScreenProps<'Account'>) {
       <Button
         title="Change to English"
         style={styles.button}
-        onPress={() => translation.changeLanguage(LType.en)}
+        onPress={() => translation.changeLanguage('en')}
       />
       <Button
         title="Change tô French"
         style={styles.button}
-        onPress={() => translation.changeLanguage(LType.fn)}
+        onPress={() => translation.changeLanguage('fr')}
       />
     </View>
   );

@@ -31,7 +31,7 @@ const Item: FC<Props> = memo(({title, Icon, onPress}) => {
 });
 
 const CustomSidebar: FC<DrawerContentComponentProps> = props => {
-  const translations = useTranslations();
+  const {translation} = useTranslations();
 
   return (
     <DrawerContentScrollView {...props} style={styles.container}>
@@ -41,23 +41,23 @@ const CustomSidebar: FC<DrawerContentComponentProps> = props => {
             <Icons.Menu />
           </TouchableOpacity>
           <Item
-            title={translations.vehicle_documents}
+            title={translation.vehicle_documents}
             Icon={Icons.SideCar}
             onPress={() => props.navigation.navigate('CarDocuments')}
           />
           <Item
-            title={translations.payment}
+            title={translation.payment}
             Icon={Icons.EmptyWallet}
             onPress={() => props.navigation.navigate('Payment')}
           />
           <Item
-            title={translations.historical}
+            title={translation.historical}
             Icon={Icons.Stickynote}
             onPress={() => props.navigation.navigate('BookingResume')}
           />
         </View>
         <Item
-          title={translations.signout}
+          title={translation.signout}
           Icon={Icons.Signout}
           onPress={() => props.navigation.navigate('Logout')}
         />

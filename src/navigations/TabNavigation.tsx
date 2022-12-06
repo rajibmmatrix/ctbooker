@@ -10,7 +10,7 @@ import {TabParamList} from 'types';
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function Tabs() {
-  const translations = useTranslations();
+  const {translation} = useTranslations();
 
   return (
     <Tab.Navigator
@@ -35,7 +35,7 @@ export default function Tabs() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: translations.welcome,
+          title: translation.welcome,
           tabBarIcon: () => <Icons.House width={20} height={20} />,
         }}
       />
@@ -43,7 +43,7 @@ export default function Tabs() {
         name="Booking"
         component={BookingScreen}
         options={{
-          title: translations.reservation,
+          title: translation.reservation,
           tabBarIcon: () => (
             <Icons.BookingTab
               width={63}
@@ -57,7 +57,7 @@ export default function Tabs() {
         name="Account"
         component={AccountScreen}
         options={{
-          title: translations.my_account,
+          title: translation.my_account,
           tabBarIcon: () => <Icons.House width={18} height={18} />,
         }}
       />

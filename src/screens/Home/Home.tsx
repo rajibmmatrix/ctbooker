@@ -13,19 +13,19 @@ import {useTranslations} from '~translation';
 import {TabScreenProps} from 'types';
 
 export default function HomeScreen({navigation}: TabScreenProps<'Home'>) {
-  const translations = useTranslations();
+  const {translation} = useTranslations();
 
   return (
     <Container>
-      <HomeHeader title={translations.home_title} />
+      <HomeHeader title={translation.home_title} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <Image source={IMAGES.Banner} style={styles.banner} />
-        <Text style={styles.title}>{translations.home_description}</Text>
+        <Text style={styles.title}>{translation.home_description}</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate('Booking')}
           style={styles.button}>
           <Icons.Clipboard height={73} width={72} />
-          <Text style={styles.buttonTitle}>{translations.booking}</Text>
+          <Text style={styles.buttonTitle}>{translation.booking}</Text>
         </TouchableOpacity>
         <Image source={IMAGES.Offer} style={styles.offer} />
       </ScrollView>

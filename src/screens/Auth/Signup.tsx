@@ -20,7 +20,7 @@ interface Props {
 type ITabs = 'individual' | 'profesonal' | null;
 
 const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
-  const tralation = useTranslations();
+  const {translation} = useTranslations();
   const [tabs, setTabs] = useState<ITabs>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
@@ -47,7 +47,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
           end={{x: 1, y: 1}}>
           <TouchableOpacity onPress={onMove} style={styles.buttonLink}>
             <Text style={[_styles.link, styles.unselectedTitle]}>
-              {tralation.login_tab}
+              {translation.login_tab}
             </Text>
           </TouchableOpacity>
           <LinearGradient
@@ -56,14 +56,14 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
             end={{x: 1, y: 1}}
             style={styles.selectedButton}>
             <Text style={[_styles.link, styles.selectedTitle]}>
-              {tralation.signup_tab}
+              {translation.signup_tab}
             </Text>
           </LinearGradient>
         </LinearGradient>
       </View>
       <View style={!tabs ? styles.body : styles.mainBody}>
         <AuthButton
-          title={tralation.individual_btn}
+          title={translation.individual_btn}
           Icon={Icons.Profile}
           isSelected={tabs === 'individual'}
           onPress={() => {
@@ -72,7 +72,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
           }}
         />
         <AuthButton
-          title={tralation.profesonal_btn}
+          title={translation.profesonal_btn}
           color={COLORS.Buttons[1]}
           Icon={Icons.UserSquare}
           isSelected={tabs === 'profesonal'}
@@ -84,26 +84,26 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
         {tabs ? (
           <View style={styles.subBody}>
             <Input
-              title={tralation.fname}
+              title={translation.fname}
               Icon={Icons.User}
-              placeholder={tralation.fname}
+              placeholder={translation.fname}
             />
             <Input
-              title={tralation.lname}
+              title={translation.lname}
               Icon={Icons.User}
-              placeholder={tralation.lname}
+              placeholder={translation.lname}
             />
             <Input
-              title={tralation.email}
+              title={translation.email}
               Icon={Icons.SMS}
-              placeholder={tralation.email}
+              placeholder={translation.email}
               autoComplete="email"
               autoCapitalize="none"
             />
             <Input
-              title={tralation.password}
+              title={translation.password}
               Icon={Icons.Lock}
-              placeholder={tralation.password}
+              placeholder={translation.password}
               secureTextEntry={true}
             />
             <View style={styles.footer}>
@@ -113,12 +113,12 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
                 />
               </TouchableOpacity>
               <Text style={[_styles.link, styles.footerTitle]}>
-                {tralation.termes_and_conditions}
+                {translation.termes_and_conditions}
               </Text>
             </View>
             <View style={styles.footerButton}>
               <Button
-                title={tralation.signup_button}
+                title={translation.signup_button}
                 disabled={!isSelected}
                 onPress={() => {}}
               />

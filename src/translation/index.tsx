@@ -1,12 +1,15 @@
 import React, {
-  useState,
   createContext,
-  useContext,
-  useCallback,
+  useReducer,
+  useMemo,
   useEffect,
+  useContext,
 } from 'react';
 import RNRestart from 'react-native-restart';
+import axios from 'axios';
+import reducer, {Actions} from './reducer';
 import language from './lang.json';
+import {baseURL, URL} from '~constants';
 import {storage} from '~utils';
 import {ITranslation} from 'types';
 
@@ -14,73 +17,73 @@ interface Props {
   children: React.ReactNode;
 }
 
-export enum LType {
-  'en',
-  'fn',
+export type IType = 'fr' | 'en';
+
+interface IContext {
+  translation: ITranslation;
+  type: IType;
+  changeLanguage: (data: IType) => void;
 }
 
-export interface IContext extends ITranslation {
-  isLangSet?: boolean;
-  changeLanguage?: (params: LType) => void;
+export interface IState {
+  lang: {
+    en: ITranslation;
+    fr: ITranslation;
+  };
+  type: IType;
+  complete: boolean;
 }
 
-export const Translation = createContext<IContext>(language.fn);
+const Translation = createContext<IContext>(null as any);
 
-export default function TranslationProvider(props: Props) {
-  const [lang, setLang] = useState<ITranslation>(language.fn);
-  const [type, setType] = useState<LType>(LType.fn);
-  const [isLangSet, setIsLangSet] = useState(false);
+const initialState: IState = {
+  lang: language,
+  type: 'fr',
+  complete: false,
+};
 
-  const changeLanguage = useCallback(
-    async (value: LType) => {
-      if (type === value) {
-        return;
-      }
-      if (value === LType.en) {
-        setLang(language.en);
-      } else if (value === LType.fn) {
-        setLang(language.fn);
-      }
-      setType(value);
-      setIsLangSet(true);
-      await storage.setLang(value);
-      RNRestart.Restart();
-    },
+export default function Translations({children}: Props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {lang, type} = state;
+
+  useEffect(() => {
+    storage.getLanguage().then(data => {
+      dispatch({type: Actions.Set_Language, payload: data});
+    });
+    axios
+      .get(baseURL + URL.lang)
+      .then(({data}) => {
+        console.log(data);
+        //dispatch({type: Actions.Update_Language, payload: data});
+      })
+      .catch(err => console.log(err));
+    return () => {};
+  }, []);
+
+  const actions = useMemo(
+    () => ({
+      setLanguage: async (data: IType) => {
+        await storage.setLanguage(data);
+        dispatch({type: Actions.Change_Language, payload: data});
+      },
+      changeLanguage: async (data: IType) => {
+        if (data === type) return;
+        await storage.setLanguage(data);
+        dispatch({type: Actions.Change_Language, payload: data});
+        RNRestart.Restart();
+      },
+      updateLanguage: async (data: ITranslation) => {
+        dispatch({type: Actions.Update_Language, payload: data});
+      },
+      completed: () => dispatch({type: Actions.Completed}),
+    }),
     [type],
   );
 
-  const updateLanguage = async (params: LType | null) => {
-    console.log(params);
-    //setLang(language.fn); // update language value from server
-  };
-
-  useEffect(() => {
-    (async () => {
-      const isLang = await storage.getLang();
-      setType(isLang as LType);
-      if (isLang === LType.en) {
-        setLang(language.en);
-        setIsLangSet(true);
-      } else if (isLang === LType.fn) {
-        setLang(language.fn);
-        setIsLangSet(true);
-      } else {
-        setType(LType.fn);
-        setLang(language.fn);
-        setIsLangSet(true);
-      }
-      updateLanguage(isLang);
-    })();
-  }, []);
-
-  const value = {
-    ...lang!,
-    isLangSet,
-    changeLanguage: changeLanguage,
-  };
-
   return (
-    <Translation.Provider value={value}>{props.children}</Translation.Provider>
+    <Translation.Provider value={{translation: lang[type], type, ...actions}}>
+      {children}
+    </Translation.Provider>
   );
 }
 
