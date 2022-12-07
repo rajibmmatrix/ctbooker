@@ -8,7 +8,6 @@ export const getToken = async (): Promise<string | null> => {
     const token = await AsyncStorage.getItem(TOKEN_LOCATION);
     return token != null ? JSON.parse(token) : null;
   } catch (e) {
-    console.log(e);
     return null;
   }
 };
@@ -19,7 +18,6 @@ export const setToken = async (value: string): Promise<boolean> => {
     await AsyncStorage.setItem(TOKEN_LOCATION, token);
     return true;
   } catch (e) {
-    console.log(e);
     return false;
   }
 };
@@ -29,7 +27,6 @@ export const deleteToken = async (): Promise<boolean> => {
     await AsyncStorage.removeItem(TOKEN_LOCATION);
     return true;
   } catch (e) {
-    console.log(e);
     return false;
   }
 };

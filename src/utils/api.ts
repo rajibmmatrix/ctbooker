@@ -29,6 +29,10 @@ export const removeApiToken = () => {
   return (API.defaults.headers.common.Authorization = '');
 };
 
+//For Common API
+export const getDetails = () => axios.get(config.baseURL + URL.details);
+export const getLanguage = () => axios.get(config.baseURL + URL.lang);
+
 //Auth API
 export const getUser = () => API.get(URL.getUser);
 export const signIn = (params: any) => API.post(URL.login, params);

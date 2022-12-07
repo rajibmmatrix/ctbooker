@@ -13,6 +13,7 @@ const development: CONFIG = {
   lang: 'en',
   mode: 'Development',
   version: '0.0.1',
+  lang_version: '0.0.1',
   baseURL: 'https://www.betatesting.net/projects/ct-booker/public',
 };
 
@@ -21,6 +22,7 @@ const production: CONFIG = {
   lang: 'fr',
   mode: 'Production',
   version: '0.0.1',
+  lang_version: '0.0.1',
   baseURL: 'https://www.betatesting.net/projects/ct-booker/public',
 };
 

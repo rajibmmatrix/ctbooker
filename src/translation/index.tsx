@@ -6,11 +6,9 @@ import React, {
   useContext,
 } from 'react';
 import RNRestart from 'react-native-restart';
-import axios from 'axios';
 import reducer, {Actions} from './reducer';
 import language from './lang.json';
-import {baseURL, URL} from '~constants';
-import {storage} from '~utils';
+import {api, log, storage} from '~utils';
 import {ITranslation} from 'types';
 
 interface Props {
@@ -67,12 +65,12 @@ export default function Translations({children}: Props) {
         RNRestart.Restart();
       },
       updateLanguage: () => {
-        axios
-          .get(baseURL + URL.lang, {headers: {type: 'client'}})
+        api
+          .getLanguage()
           .then(({data}: {data: ITranslation}) => {
             dispatch({type: Actions.Update_Language, payload: data});
           })
-          .catch(err => console.log(err));
+          .catch(err => log(err));
       },
       completed: () => dispatch({type: Actions.Completed}),
     }),
