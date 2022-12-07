@@ -23,6 +23,7 @@ interface IContext {
   translation: ITranslation;
   type: IType;
   changeLanguage: (data: IType) => void;
+  updateLanguage: () => void;
 }
 
 export interface IState {
@@ -47,17 +48,10 @@ export default function Translations({children}: Props) {
   const {lang, type} = state;
 
   useEffect(() => {
-    storage.getLanguage().then(data => {
+    (async () => {
+      const data = await storage.getLanguage();
       dispatch({type: Actions.Set_Language, payload: data});
-    });
-    axios
-      .get(baseURL + URL.lang)
-      .then(({data}) => {
-        console.log(data);
-        //dispatch({type: Actions.Update_Language, payload: data});
-      })
-      .catch(err => console.log(err));
-    return () => {};
+    })();
   }, []);
 
   const actions = useMemo(
@@ -72,8 +66,13 @@ export default function Translations({children}: Props) {
         dispatch({type: Actions.Change_Language, payload: data});
         RNRestart.Restart();
       },
-      updateLanguage: async (data: ITranslation) => {
-        dispatch({type: Actions.Update_Language, payload: data});
+      updateLanguage: () => {
+        axios
+          .get(baseURL + URL.lang, {headers: {type: 'client'}})
+          .then(({data}: {data: ITranslation}) => {
+            dispatch({type: Actions.Update_Language, payload: data});
+          })
+          .catch(err => console.log(err));
       },
       completed: () => dispatch({type: Actions.Completed}),
     }),

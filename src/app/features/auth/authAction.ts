@@ -1,51 +1,20 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import Toast from 'react-native-simple-toast';
-import {api} from '~services';
+import {api, storage} from '~utils';
 import {ILogin, ISignup, IVerify} from 'types';
 
-//For login user
-export const login = createAsyncThunk(
-  'auth/login',
-  async (params: ILogin, thunkAPI) => {
+//For Check user login or not
+export const checkLogin = createAsyncThunk(
+  'auth/checkLogin',
+  async (_, thunkAPI) => {
     try {
-      const {data} = await api.signIn(params);
-      Toast.show(data.message);
-      return data.data;
-    } catch (error: any) {
-      Toast.show(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-
-//For forgot user
-export const forgot = createAsyncThunk(
-  'auth/forgot',
-  async (params: IVerify, thunkAPI) => {
-    try {
-      const {data} = await api.forgot(params);
-      await api.saveToken(data.data?.accessToken);
-      if (data.data?.profile_completed) {
-        await api.setLogedin(true);
+      const token = await storage.getToken();
+      if (!token) {
+        return {isLogin: false, user: null};
       }
-      Toast.show(data.message);
-      return data.data;
-    } catch (error: any) {
-      Toast.show(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-
-//For signup user
-export const signup = createAsyncThunk(
-  'auth/signup',
-  async (params: ISignup, thunkAPI) => {
-    try {
-      const {data} = await api.signUp(params);
-      await api.setLogedin(true);
-      Toast.show(data.message);
-      return data.data;
+      await api.setApiToken(token);
+      const {data} = await api.getUser();
+      return {isLogin: true, user: data.data};
     } catch (error: any) {
       Toast.show(error.message);
       return thunkAPI.rejectWithValue(error.message);
@@ -64,18 +33,16 @@ export const getUser = createAsyncThunk('auth/getuser', async (_, thunkAPI) => {
   }
 });
 
-export const checkLogin = createAsyncThunk(
-  'auth/checkLogin',
-  async (_, thunkAPI) => {
+//For login user
+export const login = createAsyncThunk(
+  'auth/login',
+  async (params: ILogin, thunkAPI) => {
     try {
-      const isLogedin = await api.getLogedin();
-      const token = await api.getToken();
-      if (!token || !isLogedin) {
-        return {isLogin: false, user: null};
-      }
-      await api.setToken(token);
-      const {data} = await api.getUser();
-      return {isLogin: true, user: data.data};
+      const {data} = await api.signIn(params);
+      api.setApiToken(data.token);
+      await storage.setToken(data.token);
+      Toast.show(data.message);
+      return data.data;
     } catch (error: any) {
       Toast.show(error.message);
       return thunkAPI.rejectWithValue(error.message);
@@ -83,10 +50,43 @@ export const checkLogin = createAsyncThunk(
   },
 );
 
+//For forgot user
+export const forgot = createAsyncThunk(
+  'auth/forgot',
+  async (params: IVerify, thunkAPI) => {
+    try {
+      const {data} = await api.forgot(params);
+      Toast.show(data.message);
+      return data.data;
+    } catch (error: any) {
+      Toast.show(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+//For signup user
+export const signup = createAsyncThunk(
+  'auth/signup',
+  async (params: ISignup, thunkAPI) => {
+    try {
+      const {data} = await api.signUp(params);
+      api.setApiToken(data.token);
+      await storage.setToken(data.token);
+      Toast.show(data.message);
+      return data.data;
+    } catch (error: any) {
+      Toast.show(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+//For Logout user
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    api.deleteToken();
-    await api.setLogedin(false);
+    api.removeApiToken();
+    await storage.deleteToken();
     return false;
   } catch (error: any) {
     Toast.show(error.message);

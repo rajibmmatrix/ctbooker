@@ -11,14 +11,14 @@ import {Button, Input, Text} from '~common';
 import {Icons, IMAGES} from '~constants';
 import {COLORS, FONTS, _styles} from '~styles';
 import {useTranslations} from '~translation';
-import {startLoading, stopLoading, useActions} from '~app';
+import {startLoading, stopLoading, useDispatch} from '~app';
 
 interface Props {
   onMove: () => void;
 }
 
 const LoginScreen: FC<Props> = ({onMove}) => {
-  const dispatch = useActions();
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const {translation} = useTranslations();
 

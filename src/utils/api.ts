@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '~config';
+import {URL} from '~constants';
 
 const API = axios.create({
   baseURL: config.baseURL,
@@ -20,10 +21,18 @@ API.interceptors.response.use(
   },
 );
 
-export const setApiToken = (AUTH_TOKEN: string) =>
-  (API.defaults.headers.common.Authorization = `Bearer ${AUTH_TOKEN}`);
+export const setApiToken = (AUTH_TOKEN: string) => {
+  return (API.defaults.headers.common.Authorization = `Bearer ${AUTH_TOKEN}`);
+};
 
-export const removeApiToken = () =>
-  (API.defaults.headers.common.Authorization = '');
+export const removeApiToken = () => {
+  return (API.defaults.headers.common.Authorization = '');
+};
+
+//Auth API
+export const getUser = () => API.get(URL.getUser);
+export const signIn = (params: any) => API.post(URL.login, params);
+export const signUp = (params: any) => API.put(URL.signup, params);
+export const forgot = (params: any) => API.post(URL.forgot, params);
 
 export default API;

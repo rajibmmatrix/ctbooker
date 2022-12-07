@@ -15,6 +15,7 @@ interface Props extends TextInputProps {
   containerStyle?: ViewStyle;
   titleStyle?: ViewStyle;
   Icon: FC<SvgProps>;
+  error?: boolean;
 }
 
 const Input: FC<Props> = ({
@@ -22,10 +23,13 @@ const Input: FC<Props> = ({
   titleStyle,
   containerStyle,
   Icon,
+  error = false,
   ...props
 }) => {
+  const errorStyle = error ? {borderBottomColor: COLORS.Error} : null;
+
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle, errorStyle]}>
       <View style={styles.header}>
         <Icon width={14} height={14} />
         <Text style={[_styles.link, styles.title, titleStyle]}>{title}</Text>

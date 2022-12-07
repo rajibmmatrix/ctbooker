@@ -19,4 +19,5 @@ export const COLORS = {
   Primary_Gradient: ['#DD6CFD', '#8304A7', '#C700FF', '#70058E', '#eeafff'],
   Buttons: ['#AC50C6', '#67BFF0', '#505CC6'],
   Dark_Card: '#1D1D1D',
+  Error: '#ff3333',
 };
