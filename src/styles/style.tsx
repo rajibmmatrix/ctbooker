@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from './colors';
 import {FONTS} from './fonts';
+import {fontSize} from './sizes';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,49 +40,49 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   header: {
-    fontSize: 22,
+    fontSize: fontSize(22),
     fontWeight: '700',
     fontFamily: FONTS.Primary_Bold,
     lineHeight: 33,
   },
   subHeader: {
-    fontSize: 16,
+    fontSize: fontSize(16),
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     lineHeight: 24,
   },
   body: {
-    fontSize: 15,
+    fontSize: fontSize(15),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 18,
   },
   input: {
-    fontSize: 12,
+    fontSize: fontSize(12),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 18,
   },
   description: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 16,
   },
   title: {
-    fontSize: 18,
+    fontSize: fontSize(18),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 21,
   },
   subTitle: {
-    fontSize: 11,
+    fontSize: fontSize(11),
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     lineHeight: 16,
   },
   link: {
-    fontSize: 12,
+    fontSize: fontSize(12),
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     lineHeight: 18,

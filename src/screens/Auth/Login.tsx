@@ -4,15 +4,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation, CommonActions} from '@react-navigation/native';
-import {Button, Input, Text} from '~common';
+import {Button, Input} from '~common';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
-import {COLORS, FONTS, _styles} from '~styles';
-import {login, startLoading, stopLoading, useDispatch} from '~app';
-import {log, showToaster} from '~utils';
+import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
+import {startLoading, stopLoading, useDispatch} from '~app';
+import {showToaster} from '~utils';
 
 interface Props {
   onMove: () => void;
@@ -152,14 +153,14 @@ export default memo(LoginScreen);
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
+    padding: SIZES.H10, //10,
     width: '100%',
     paddingBottom: 0,
     backgroundColor: 'transparent',
-    height: 319 + 17,
+    height: screenHeight * 0.4,
   },
   cardbody: {
-    resizeMode: 'contain',
+    resizeMode: 'stretch',
   },
   header: {
     flexDirection: 'row',
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
     textAlign: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: SIZES.H10, //10,
   },
   unselectedTitle: {
     fontWeight: '300',
@@ -185,22 +186,22 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   selectedButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 10,
+    paddingVertical: SIZES.V12, //12,
+    paddingHorizontal: SIZES.H10, //10,
     borderRadius: 25,
   },
   buttonLink: {
-    paddingLeft: 5,
-    paddingRight: 11,
-    paddingVertical: 12,
+    paddingLeft: SIZES.H5, //5,
+    paddingRight: SIZES.H10, //10
+    paddingVertical: SIZES.V12, //12,
   },
   body: {
     flex: 1,
-    marginTop: 48,
-    paddingHorizontal: 30,
+    marginTop: SIZES.V45, //45,
+    paddingHorizontal: SIZES.H15 * 2, //30,
   },
   link: {
-    marginTop: -7,
+    marginTop: -SIZES.H7,
     textAlign: 'center',
     textTransform: 'capitalize',
   },

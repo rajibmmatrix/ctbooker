@@ -9,7 +9,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthButton, Button, Input} from '~components';
 import {Icons, IMAGES} from '~constants';
-import {COLORS, FONTS, _styles} from '~styles';
+import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
 import {useTranslations} from '~translation';
 
 interface Props {
@@ -24,16 +24,6 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
   const [tabs, setTabs] = useState<ITabs>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
-  const selectedColor = [
-    COLORS.Primary_Gradient[3],
-    COLORS.Primary_Gradient[2],
-  ];
-
-  const unSelectedColor = [
-    COLORS.Primary_Gradient[0],
-    COLORS.Primary_Gradient[1],
-  ];
-
   return (
     <ImageBackground
       source={!tabs ? IMAGES.Card : IMAGES.BigCard}
@@ -41,7 +31,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
       imageStyle={styles.cardbody}>
       <View style={styles.header}>
         <LinearGradient
-          colors={unSelectedColor}
+          colors={[COLORS.Primary_Gradient[0], COLORS.Primary_Gradient[1]]}
           style={styles.button}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 1}}>
@@ -51,7 +41,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
             </Text>
           </TouchableOpacity>
           <LinearGradient
-            colors={selectedColor}
+            colors={[COLORS.Primary_Gradient[3], COLORS.Primary_Gradient[2]]}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 1}}
             style={styles.selectedButton}>
@@ -134,20 +124,20 @@ export default memo(SignupScreen);
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
+    padding: SIZES.H10, //10,
     width: '100%',
     backgroundColor: 'transparent',
-    height: 319 + 17,
+    height: screenHeight * 0.4,
   },
   bigCard: {
     width: '100%',
-    padding: 10,
+    padding: SIZES.H10, //10,
     paddingBottom: 0,
     backgroundColor: 'transparent',
     height: 639 + 17,
   },
   cardbody: {
-    resizeMode: 'contain',
+    resizeMode: 'stretch',
   },
   header: {
     flexDirection: 'row',
@@ -159,7 +149,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
     textAlign: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: SIZES.H10, //10,
   },
   unselectedTitle: {
     fontWeight: '300',
@@ -173,28 +163,28 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   selectedButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 10,
+    paddingVertical: SIZES.V12, //12,
+    paddingHorizontal: SIZES.H10, //10,
     borderRadius: 25,
   },
   buttonLink: {
-    paddingRight: 8,
-    paddingLeft: 10,
-    paddingVertical: 12,
+    paddingRight: SIZES.H8, //8,
+    paddingLeft: SIZES.H10, //10,
+    paddingVertical: SIZES.V12, //12,
   },
   body: {
     flex: 1,
-    marginTop: 48,
-    paddingHorizontal: 30,
+    marginTop: SIZES.V45, //45,
+    paddingHorizontal: SIZES.H15 * 2, //30,
   },
   mainBody: {
     flex: 1,
-    marginTop: 24,
-    paddingHorizontal: 30,
+    marginTop: SIZES.V12 * 2, //24,
+    paddingHorizontal: SIZES.H15 * 2, //30,
   },
   subBody: {
     flex: 1,
-    marginTop: 8,
+    marginTop: SIZES.V8, //8,
   },
   footer: {
     flexDirection: 'row',
@@ -203,7 +193,7 @@ const styles = StyleSheet.create({
   },
   footerTitle: {
     color: COLORS.Primary_Link,
-    marginLeft: 12,
+    marginLeft: SIZES.H12, //12,
   },
   footerButton: {
     bottom: -25,

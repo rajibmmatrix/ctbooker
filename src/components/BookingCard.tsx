@@ -1,7 +1,7 @@
 import React, {FC, memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Icons} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize} from '~styles';
 import {useTranslations} from '~translation';
 
 interface Props {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 15,
+    fontSize: fontSize(15),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 18,

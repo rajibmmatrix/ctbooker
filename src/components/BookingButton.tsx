@@ -2,7 +2,7 @@ import React, {FC, memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SvgProps} from 'react-native-svg';
 import {Icons} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize, SIZES} from '~styles';
 
 interface Props {
   title: string;
@@ -31,20 +31,20 @@ const styles = StyleSheet.create({
   button: {
     height: 83,
     borderRadius: 30,
-    marginBottom: 39,
+    marginBottom: SIZES.V38, //38,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingRight: 30,
+    paddingRight: SIZES.H15 * 2, //30,
   },
   title: {
     flex: 1,
-    fontSize: 15,
+    fontSize: fontSize(15),
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     textAlign: 'left',
     color: COLORS.Light,
-    marginLeft: 14,
+    marginLeft: SIZES.H7 * 2, //14,
   },
   image: {
     width: 75,

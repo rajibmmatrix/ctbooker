@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SvgProps} from 'react-native-svg';
 import {useTranslations} from '~translation';
 import {Icons} from '~constants';
-import {COLORS, FONTS, _styles} from '~styles';
+import {COLORS, FONTS, fontSize, SIZES, _styles} from '~styles';
 
 interface Props {
   Icon: FC<SvgProps>;
@@ -37,34 +37,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingLeft: 16,
     borderBottomWidth: 1,
-    marginTop: 10,
+    marginTop: SIZES.V10, //10,
+    paddingLeft: SIZES.H8 * 2, //16,
     borderBottomColor: COLORS.Primary_Line,
   },
   title: {
-    width: '62%',
-    fontSize: 14,
+    maxWidth: 156,
+    fontSize: fontSize(14),
     fontWeight: '400',
     lineHeight: 15,
     fontFamily: FONTS.Secondary_Regular,
     color: COLORS.Primary_Placeholder,
-    paddingLeft: 7,
+    paddingLeft: SIZES.H7, //7,
   },
   button: {
     height: 30,
-    paddingHorizontal: 6,
+    width: 115,
+    paddingHorizontal: SIZES.H3 * 2, //6,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 8,
     backgroundColor: COLORS.Buttons[0],
   },
   buttonTitle: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: '500',
     lineHeight: 16,
     fontFamily: FONTS.Secondary_Medium,
     color: COLORS.Light,
-    paddingLeft: 4,
+    paddingLeft: SIZES.H2 * 2, //4,
   },
 });

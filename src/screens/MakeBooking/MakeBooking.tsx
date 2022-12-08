@@ -9,9 +9,9 @@ import {
   RadioButton,
 } from '~components';
 import {useTranslations} from '~translation';
-import {SideScreenProps} from 'types';
 import {Icons} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize, SIZES} from '~styles';
+import {SideScreenProps} from 'types';
 
 export default function MakeBookingScreen({
   route,
@@ -92,6 +92,7 @@ export default function MakeBookingScreen({
               <TextInput
                 placeholder={translation.vehicle_problem}
                 numberOfLines={4}
+                style={styles.input}
               />
             </View>
             <Text style={[styles.input, styles.placeHolder]}>
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   title: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: '500',
     lineHeight: 16,
     fontFamily: FONTS.Secondary_Medium,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.Primary_Line,
   },
   input: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: '400',
     lineHeight: 16,
     marginLeft: 11,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   buttonTitle: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: '700',
     lineHeight: 16,
     fontFamily: FONTS.Secondary_Bold,
@@ -184,7 +185,8 @@ const styles = StyleSheet.create({
     color: COLORS.Light,
   },
   footer: {
-    marginTop: 20,
+    marginTop: SIZES.V22, //22,
+    marginBottom: SIZES.V38, //38,
     alignSelf: 'center',
   },
   placeHolder: {

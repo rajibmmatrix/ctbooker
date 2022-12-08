@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {HomeHeader, Container} from '~components';
 import {Icons, IMAGES} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize, screenHeight} from '~styles';
 import {useTranslations} from '~translation';
 import {TabScreenProps} from 'types';
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   banner: {
-    height: 132,
+    height: screenHeight * 0.15, //132
     width: '100%',
     resizeMode: 'cover',
     alignSelf: 'center',
@@ -49,21 +49,21 @@ const styles = StyleSheet.create({
     borderColor: COLORS.Primary_Border,
   },
   title: {
-    fontSize: 13,
+    fontSize: fontSize(13),
     fontWeight: '700',
     fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
     marginVertical: 20,
   },
   button: {
-    height: 205,
+    height: screenHeight * 0.25, //205,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.Buttons[0],
     borderRadius: 22,
   },
   buttonTitle: {
-    fontSize: 22,
+    fontSize: fontSize(22),
     fontWeight: '700',
     fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
@@ -71,10 +71,11 @@ const styles = StyleSheet.create({
     marginTop: 18,
   },
   offer: {
-    height: 232,
+    height: screenHeight * 0.25, //232,
     width: '100%',
+    resizeMode: 'cover',
     alignSelf: 'center',
-    marginTop: 27,
+    marginVertical: 27,
     borderWidth: 1,
     borderRadius: 22,
     borderColor: COLORS.Primary_Border,

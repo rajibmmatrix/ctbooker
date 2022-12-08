@@ -1,7 +1,7 @@
 import React, {FC, memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {Icons} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize} from '~styles';
 
 interface Props {
   title: string;
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 12,
+    fontSize: fontSize(12),
     fontWeight: '400',
     lineHeight: 14,
     fontFamily: FONTS.Secondary_Regular,

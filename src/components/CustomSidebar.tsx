@@ -11,7 +11,7 @@ import {
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
 import {SvgProps} from 'react-native-svg';
-import {COLORS, FONTS, _styles} from '~styles';
+import {COLORS, FONTS, fontSize, _styles} from '~styles';
 import {useTranslations} from '~translation';
 import {Icons} from '~constants';
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 13,
+    fontSize: fontSize(13),
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     color: COLORS.Light,

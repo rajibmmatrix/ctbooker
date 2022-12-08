@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {SvgProps} from 'react-native-svg';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize} from '~styles';
 
 interface Props extends TextInputProps {
   Icon: FC<SvgProps>;
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 12,
+    fontSize: fontSize(12),
     fontWeight: '400',
     fontFamily: FONTS.Secondary_Regular,
     lineHeight: 14,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     marginLeft: 10 + 20,
   },
   input: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,
     lineHeight: 16,

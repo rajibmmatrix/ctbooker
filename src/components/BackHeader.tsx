@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Icons} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize, SIZES} from '~styles';
 
 interface Props {
   title: string;
@@ -32,14 +32,14 @@ export default memo(BackHeader);
 
 const styles = StyleSheet.create({
   header: {
-    padding: 20,
-    paddingTop: 10,
+    padding: SIZES.H10 * 2, //20,
+    paddingTop: SIZES.V10, // 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   title: {
     flex: 1,
-    fontSize: 18,
+    fontSize: fontSize(18),
     fontWeight: '500',
     lineHeight: 21,
     fontFamily: FONTS.Secondary_Medium,

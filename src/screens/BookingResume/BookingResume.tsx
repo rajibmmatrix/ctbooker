@@ -1,8 +1,9 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {BackHeader, BookingCard, Container} from '~components';
-import {SideScreenProps} from 'types';
 import {useTranslations} from '~translation';
+import {SIZES} from '~styles';
+import {SideScreenProps} from 'types';
 
 export default function BookingResumeScreen({}: SideScreenProps<'BookingResume'>) {
   const {translation} = useTranslations();
@@ -49,7 +50,7 @@ export default function BookingResumeScreen({}: SideScreenProps<'BookingResume'>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: SIZES.V10, //10,
   },
   body: {
     flex: 1,

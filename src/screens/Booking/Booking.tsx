@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {BookingButton, Container, HomeHeader} from '~components';
 import {Icons, IMAGES} from '~constants';
-import {COLORS, FONTS} from '~styles';
+import {COLORS, FONTS, fontSize, screenHeight, SIZES} from '~styles';
 import {useTranslations} from '~translation';
 import {TabScreenProps} from 'types';
 
@@ -51,19 +51,19 @@ export default function BookingScreen({navigation}: TabScreenProps<'Booking'>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 29,
+    paddingHorizontal: SIZES.H15 * 2, //30,
   },
   header: {
     marginTop: 34,
   },
   title: {
-    fontSize: 13,
+    fontSize: fontSize(13),
     fontWeight: '700',
     fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
   },
   image: {
-    height: 290,
+    height: screenHeight * 0.3,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginTop: -13,
