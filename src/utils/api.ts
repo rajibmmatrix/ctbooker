@@ -5,18 +5,23 @@ import {URL} from '~constants';
 const API = axios.create({
   baseURL: config.baseURL,
   responseType: 'json',
-  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 API.interceptors.response.use(
   function (response) {
-    if (response.data?.success) {
+    console.log('Response: ' + JSON.stringify(response));
+    if (response.data?.status && response.data?.status !== 0) {
       return response;
     } else {
-      return Promise.reject(response);
+      const message = response.data?.message;
+      return Promise.reject(message);
     }
   },
   function (error) {
+    console.log('error: ' + error);
     return Promise.reject(error);
   },
 );

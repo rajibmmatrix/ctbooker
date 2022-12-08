@@ -85,7 +85,8 @@ export interface CONFIG {
 }
 
 export interface ILogin {
-  phone_no: string;
+  email: string;
+  password: string;
 }
 
 export interface IVerify {

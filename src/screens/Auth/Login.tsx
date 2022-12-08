@@ -1,4 +1,4 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -9,9 +9,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation, CommonActions} from '@react-navigation/native';
 import {Button, Input, Text} from '~common';
 import {Icons, IMAGES} from '~constants';
-import {COLORS, FONTS, _styles} from '~styles';
 import {useTranslations} from '~translation';
-import {startLoading, stopLoading, useDispatch} from '~app';
+import {COLORS, FONTS, _styles} from '~styles';
+import {login, startLoading, stopLoading, useDispatch} from '~app';
+import {log, showToaster} from '~utils';
 
 interface Props {
   onMove: () => void;
@@ -22,18 +23,39 @@ const LoginScreen: FC<Props> = ({onMove}) => {
   const navigation = useNavigation();
   const {translation} = useTranslations();
 
-  const selectedColor = [
-    COLORS.Primary_Gradient[2],
-    COLORS.Primary_Gradient[3],
-  ];
+  const [form, setForm] = useState<{email: string; password: string}>({
+    email: '',
+    password: '',
+  });
 
-  const unSelectedColor = [
-    COLORS.Primary_Gradient[4],
-    COLORS.Primary_Gradient[0],
-    COLORS.Primary_Gradient[1],
-  ];
+  const [error, setError] = useState<{email: string; password: string}>({
+    email: '',
+    password: '',
+  });
+
+  const checkValidation = () => {
+    let status = false;
+    const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
+    const isError = {email: '', password: ''};
+    if (!form.email.trim()) {
+      status = true;
+      isError.email = 'Email is required.';
+    } else if (!reg.test(form.email.trim())) {
+      status = true;
+      isError.email = 'Email not valid.';
+    }
+    if (!form.password.trim()) {
+      status = true;
+      isError.password = 'Password is required.';
+    }
+    setError(isError);
+    return status;
+  };
 
   const handleLogin = () => {
+    if (checkValidation()) {
+      return showToaster('Please enter a valid email and password', 'error');
+    }
     dispatch(startLoading());
     setTimeout(() => {
       dispatch(stopLoading());
@@ -41,6 +63,23 @@ const LoginScreen: FC<Props> = ({onMove}) => {
         CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
       );
     }, 3000);
+    /* var formData = new FormData();
+    formData.append('email', form.email);
+    formData.append('password', form.password);
+    formData.append('lang', 'en');
+    dispatch(startLoading());
+    dispatch(login(formData as any))
+      .unwrap()
+      .then(res => {
+        log(res);
+        navigation.dispatch(
+          CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
+        );
+      })
+      .catch(() => {
+        //log(err);
+      })
+      .finally(() => dispatch(stopLoading())); */
   };
 
   return (
@@ -50,12 +89,16 @@ const LoginScreen: FC<Props> = ({onMove}) => {
       imageStyle={styles.cardbody}>
       <View style={styles.header}>
         <LinearGradient
-          colors={unSelectedColor}
+          colors={[
+            COLORS.Primary_Gradient[4],
+            COLORS.Primary_Gradient[0],
+            COLORS.Primary_Gradient[1],
+          ]}
           style={styles.button}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 1}}>
           <LinearGradient
-            colors={selectedColor}
+            colors={[COLORS.Primary_Gradient[2], COLORS.Primary_Gradient[3]]}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 1}}
             style={styles.selectedButton}>
@@ -77,12 +120,20 @@ const LoginScreen: FC<Props> = ({onMove}) => {
           placeholder={translation.email}
           autoComplete="email"
           autoCapitalize="none"
+          onChangeText={(e: string) => setForm(prev => ({...prev, email: e}))}
+          value={form.email}
+          error={!!error.email}
         />
         <Input
           title={translation.password}
           Icon={Icons.Lock}
           placeholder={translation.password}
           secureTextEntry={true}
+          onChangeText={(e: string) =>
+            setForm(prev => ({...prev, password: e}))
+          }
+          value={form.password}
+          error={!!error.password}
         />
         <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
           <Text style={[_styles.link, styles.link]}>
