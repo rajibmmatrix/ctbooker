@@ -64,13 +64,11 @@ export default function Translations({children}: Props) {
         dispatch({type: Actions.Change_Language, payload: data});
         RNRestart.Restart();
       },
-      updateLanguage: () => {
-        api
-          .getLanguage()
-          .then(({data}: {data: ITranslation}) => {
-            dispatch({type: Actions.Update_Language, payload: data});
-          })
-          .catch(err => log(err));
+      updateLanguage: async () => {
+        const data = await api.getLanguage().catch(err => log(err));
+        if (data?.data) {
+          dispatch({type: Actions.Update_Language, payload: data?.data});
+        }
       },
       completed: () => dispatch({type: Actions.Completed}),
     }),

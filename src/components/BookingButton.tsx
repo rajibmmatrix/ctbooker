@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   button: {
     height: 83,
     borderRadius: 30,
-    marginBottom: SIZES.V38, //38,
+    marginBottom: SIZES.V10 * 3, //38,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -63,7 +63,7 @@ const LoginScreen: FC<Props> = ({onMove}) => {
       navigation.dispatch(
         CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
       );
-    }, 3000);
+    }, 1500);
     /* var formData = new FormData();
     formData.append('email', form.email);
     formData.append('password', form.password);
@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
   },
   link: {
     marginTop: -SIZES.H7,
+    paddingBottom: SIZES.V22 * 2,
     textAlign: 'center',
     textTransform: 'capitalize',
   },

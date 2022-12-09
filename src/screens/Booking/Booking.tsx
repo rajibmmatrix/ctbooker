@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SIZES.H15 * 2, //30,
   },
   header: {
-    marginTop: 34,
+    marginTop: SIZES.V10 * 2.6,
   },
   title: {
     fontSize: fontSize(13),

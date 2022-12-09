@@ -62,7 +62,7 @@ export default function AuthScreen({}: StackScreenProps<'Auth'>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: SIZES.V38 * 1.35, //76,
+    paddingTop: SIZES.V38 * 1.3, //76,
     //paddingBottom: 220, // SIZES.V110 * 2, //220,
     paddingHorizontal: SIZES.H28, //28,
     minHeight: height,
@@ -76,11 +76,11 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: 'center',
-    marginBottom: SIZES.V22, // 22,
+    marginBottom: SIZES.V15, // 22,
   },
   title: {
     textAlign: 'center',
-    marginBottom: SIZES.V38, //38,
+    marginBottom: SIZES.V38 * 0.8, //38,
     color: COLORS.Light,
   },
   body: {

@@ -55,7 +55,9 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   input: {
-    height: 35,
+    margin: 0,
+    padding: 0,
+    height: 30,
     width: '100%',
     paddingLeft: 19,
     fontWeight: '300',

@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Image, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import Splash from 'react-native-splash-screen';
 import {IMAGES} from '~constants';
-import {COLORS} from '~styles';
-import {StackScreenProps} from 'types';
 import {checkLogin, useDispatch} from '~app';
+import {StackScreenProps} from 'types';
 
 export default function SplashScreen({navigation}: StackScreenProps<'Splash'>) {
   const dispatch = useDispatch();
@@ -26,12 +25,6 @@ export default function SplashScreen({navigation}: StackScreenProps<'Splash'>) {
   return (
     <View style={styles.container}>
       <Image source={IMAGES.Splash} style={styles.image} />
-      <ActivityIndicator
-        size="large"
-        animating={true}
-        color={COLORS.Primary}
-        style={styles.spinner}
-      />
     </View>
   );
 }
@@ -44,10 +37,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-  },
-  spinner: {
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: 230,
   },
 });

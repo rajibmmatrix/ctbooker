@@ -34,3 +34,5 @@ export {default as Routing} from '../assets/icons/routing.svg';
 export {default as ShieldTick} from '../assets/icons/shield-tick.svg';
 export {default as SmallCar} from '../assets/icons/small_car.svg';
 export {default as Book} from '../assets/icons/book.svg';
+export {default as CLeft} from '../assets/icons/chevron_left.svg';
+export {default as CRight} from '../assets/icons/chevron_right.svg';
