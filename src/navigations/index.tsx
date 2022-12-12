@@ -8,6 +8,7 @@ import config from '~config';
 import {useTranslations} from '~translation';
 import {api, log} from '~utils';
 import {StackParamList} from 'types';
+import {loading, useDispatch} from '~app';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -20,7 +21,8 @@ interface IResponse {
 }
 
 export default function Navigation() {
-  const {updateLanguage} = useTranslations();
+  const dispatch = useDispatch();
+  const {updateLanguage, version} = useTranslations();
 
   useEffect(() => {
     api
@@ -39,15 +41,29 @@ export default function Navigation() {
               },
             ],
           );
-        } else if (config.lang_version !== data.versionLatest) {
+        } else if (version !== data.versionLatest) {
           //Update Language from Server if not updated.
-          updateLanguage();
+          Alert.alert(
+            'Please Sync',
+            'Your app is outdated, Please sync to continue.',
+            [
+              {
+                text: 'OK',
+                onPress: async () => {
+                  dispatch(loading(true));
+                  updateLanguage(data.versionLatest, () => {
+                    dispatch(loading(false));
+                  });
+                },
+              },
+            ],
+          );
         }
       })
       .catch(err => log(err));
 
     return () => {};
-  }, [updateLanguage]);
+  }, [updateLanguage, version, dispatch]);
 
   return (
     <NavigationContainer>
