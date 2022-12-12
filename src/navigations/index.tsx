@@ -7,7 +7,7 @@ import {UpdateModal} from '~components';
 import Sidebar from './SideNavigation';
 import config from '~config';
 import {useTranslations} from '~translation';
-import {api, log} from '~utils';
+import {api, log, storage} from '~utils';
 import {loading, useDispatch} from '~app';
 import {StackParamList} from 'types';
 
@@ -31,14 +31,22 @@ export default function Navigation() {
   useEffect(() => {
     api
       .getDetails()
-      .then(({data}: {data: IResponse}) => {
+      .then(async ({data}: {data: IResponse}) => {
         if (data.version !== config.version) {
           setShowModal(true);
           setIsForLang(false);
         } else if (version !== data.versionLatest) {
-          setShowModal(true);
-          setIsForLang(true);
-          setNewVersion(data.versionLatest);
+          const isFirstTime = await storage.getLanguage();
+          if (isFirstTime !== null) {
+            setIsForLang(true);
+            setShowModal(true);
+            setNewVersion(data.versionLatest);
+          } else {
+            dispatch(loading(true));
+            updateLanguage(data.versionLatest, () => {
+              dispatch(loading(false));
+            });
+          }
         }
       })
       .catch(err => log(err));
