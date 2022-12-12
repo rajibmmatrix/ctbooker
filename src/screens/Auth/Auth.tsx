@@ -26,6 +26,7 @@ export default function AuthScreen({}: StackScreenProps<'Auth'>) {
     <Container>
       <ScrollView
         style={[_styles.container]}
+        scrollEnabled={isSignupShow}
         showsVerticalScrollIndicator={false}>
         <ImageBackground
           source={IMAGES.Background}
@@ -62,7 +63,7 @@ export default function AuthScreen({}: StackScreenProps<'Auth'>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: SIZES.V38 * 1.3, //76,
+    paddingTop: SIZES.V38 * 1.22, //76,
     //paddingBottom: 220, // SIZES.V110 * 2, //220,
     paddingHorizontal: SIZES.H28, //28,
     minHeight: height,
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: 'center',
-    marginBottom: SIZES.V15, // 22,
+    marginBottom: SIZES.V15 * 0.9, // 22,
   },
   title: {
     textAlign: 'center',

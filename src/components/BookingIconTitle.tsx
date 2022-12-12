@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     marginLeft: 10 + 20,
   },
   input: {
+    flex: 1,
     fontSize: fontSize(14),
     fontWeight: '500',
     fontFamily: FONTS.Secondary_Medium,

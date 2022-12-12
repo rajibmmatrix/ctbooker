@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {COLORS, FONTS, fontSize} from '~styles';
 
 export default function NotificationScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Notification Screen</Text>
+      <Text style={styles.title}>Coming soon</Text>
     </View>
   );
 }
@@ -14,10 +15,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: COLORS.Primary_Background[0],
   },
   title: {
-    fontSize: 24,
-    textAlign: 'center',
-    color: '#000000',
+    fontSize: fontSize(14),
+    fontWeight: 'bold',
+    fontFamily: FONTS.Primary_Bold,
+    color: COLORS.Light,
   },
 });

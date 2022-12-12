@@ -1,17 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+//import {Button} from '~common';
+import {COLORS, FONTS, fontSize} from '~styles';
+//import {useTranslations} from '~translation';
 import {TabScreenProps} from 'types';
-import {Button} from '~common';
-import {COLORS} from '~styles';
-import {useTranslations} from '~translation';
 
 export default function AccountScreen({}: TabScreenProps<'Account'>) {
-  const translation = useTranslations();
+  //const translation = useTranslations();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Account Screen</Text>
-      <Button
+      <Text style={styles.title}>Coming soon</Text>
+      {/* <Button
         title="Change to English"
         style={styles.button}
         onPress={() => translation.changeLanguage('en')}
@@ -20,7 +20,7 @@ export default function AccountScreen({}: TabScreenProps<'Account'>) {
         title="Change tô French"
         style={styles.button}
         onPress={() => translation.changeLanguage('fr')}
-      />
+      /> */}
     </View>
   );
 }
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.Primary_Background[0],
   },
   title: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: 'bold',
+    fontFamily: FONTS.Primary_Bold,
     color: COLORS.Light,
   },
   button: {

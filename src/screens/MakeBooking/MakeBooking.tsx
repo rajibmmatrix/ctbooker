@@ -1,5 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View, TextInput} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import {
   BackHeader,
   BookingFileUpload,
@@ -11,16 +18,20 @@ import {
 import {useTranslations} from '~translation';
 import {Icons} from '~constants';
 import {COLORS, FONTS, fontSize, SIZES} from '~styles';
+import {loading, useDispatch} from '~app';
 import {SideScreenProps} from 'types';
 
 export default function MakeBookingScreen({
+  navigation,
   route,
 }: SideScreenProps<'MakeBooking'>) {
   const {type} = route.params;
+  const dispatch = useDispatch();
   const {translation} = useTranslations();
   const [title, setTitle] = useState('');
   const [date, setDate] = useState<Date | null>(null);
   const [showDateTime, setShowDateTime] = useState<boolean>(false);
+  const [isTCSelected, setIsTCSelected] = useState<boolean>(false);
   const [mode, setMode] = useState<'date' | 'time'>('date');
 
   useLayoutEffect(() => {
@@ -92,7 +103,7 @@ export default function MakeBookingScreen({
               <TextInput
                 placeholder={translation.vehicle_problem}
                 numberOfLines={4}
-                style={styles.input}
+                style={[styles.input, styles.inputBox]}
               />
             </View>
             <Text style={[styles.input, styles.placeHolder]}>
@@ -100,7 +111,12 @@ export default function MakeBookingScreen({
             </Text>
           </>
         ) : (
-          <Text style={styles.title}>{translation.price}</Text>
+          <Text style={styles.title}>
+            {translation.price}: 80 euros{' '}
+            {type === 'Technical Control'
+              ? '( contrôle technique inclus)'
+              : null}
+          </Text>
         )}
         <BookingFileUpload
           Icon={Icons.ShieldTick}
@@ -114,13 +130,21 @@ export default function MakeBookingScreen({
           Icon={Icons.CPU}
           title={translation.valid_technical_control}
         />
-        <View style={styles.button}>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(loading(true));
+            setTimeout(() => {
+              dispatch(loading(false));
+              navigation.navigate('Tab', {screen: 'Booking'});
+            }, 1500);
+          }}
+          style={styles.button}>
           <Text style={styles.buttonTitle}>{translation.next}</Text>
-        </View>
+        </TouchableOpacity>
         <RadioButton
           title={translation.termes_and_conditions}
-          isSelected={false}
-          onPress={() => {}}
+          isSelected={isTCSelected}
+          onPress={() => setIsTCSelected(prev => !prev)}
           style={styles.footer}
         />
         <DateTimePicker
@@ -166,6 +190,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.Secondary_Regular,
     color: COLORS.Primary_Placeholder,
   },
+  inputBox: {flex: 1},
   button: {
     width: 180,
     height: 50,

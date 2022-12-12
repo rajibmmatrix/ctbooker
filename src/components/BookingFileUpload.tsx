@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.Primary_Line,
   },
   title: {
-    maxWidth: 156,
+    width: 135,
     fontSize: fontSize(14),
     fontWeight: '400',
     lineHeight: 15,

@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {COLORS, FONTS, fontSize} from '~styles';
 import {SideScreenProps} from 'types';
 
 export default function PaymentScreen({}: SideScreenProps<'Payment'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Payment Screen</Text>
+      <Text style={styles.title}>Coming soon</Text>
     </View>
   );
 }
@@ -15,11 +16,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: COLORS.Primary_Background[0],
   },
   title: {
-    fontSize: 14,
+    fontSize: fontSize(14),
     fontWeight: 'bold',
-    color: '#000000',
+    fontFamily: FONTS.Primary_Bold,
+    color: COLORS.Light,
   },
 });
