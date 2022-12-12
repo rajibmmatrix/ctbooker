@@ -8,3 +8,4 @@ export {default as BackHeader} from './BackHeader';
 export {default as BookingIconTitle} from './BookingIconTitle';
 export {default as BookingFileUpload} from './BookingFileUpload';
 export {default as BookingCard} from './BookingCard';
+export {default as UpdateModal} from './UpdateModal';
