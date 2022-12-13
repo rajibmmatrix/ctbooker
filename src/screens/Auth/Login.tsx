@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
     paddingBottom: SIZES.V22 * 2,
     textAlign: 'center',
     textTransform: 'capitalize',
+    color: COLORS.Primary_Link,
   },
   footerButton: {
     bottom: -25,

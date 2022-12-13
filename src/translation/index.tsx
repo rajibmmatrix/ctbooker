@@ -6,12 +6,13 @@ import React, {
   useContext,
   useState,
 } from 'react';
+import {ActivityIndicator} from 'react-native';
 import RNRestart from 'react-native-restart';
 import reducer, {Actions} from './reducer';
 import language from './lang.json';
+import config from '~config';
 import {api, log, storage} from '~utils';
 import {ITranslation} from 'types';
-import config from '~config';
 
 interface Props {
   children: React.ReactNode;
@@ -94,7 +95,7 @@ export default function Translations({children}: Props) {
   );
 
   if (loading) {
-    return;
+    return <ActivityIndicator />;
   }
 
   return (

@@ -34,7 +34,11 @@ const Input: FC<Props> = ({
         <Icon width={14} height={14} />
         <Text style={[_styles.link, styles.title, titleStyle]}>{title}</Text>
       </View>
-      <TextInput {...props} style={[_styles.link, styles.input]} />
+      <TextInput
+        {...props}
+        placeholderTextColor={COLORS.Light}
+        style={[_styles.link, styles.input]}
+      />
     </View>
   );
 };
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    color: COLORS.Light,
     marginLeft: 5,
   },
   input: {

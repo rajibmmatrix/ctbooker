@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ctbookerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ctbookerTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-ctbooker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-ctbooker.a */; };
+		0F237EDC29488BE500A08A07 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237ED529488BE500A08A07 /* Poppins-Bold.ttf */; };
+		0F237EDD29488BE500A08A07 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237ED629488BE500A08A07 /* Roboto-Bold.ttf */; };
+		0F237EDE29488BE500A08A07 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237ED729488BE500A08A07 /* Poppins-Light.ttf */; };
+		0F237EDF29488BE500A08A07 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237ED829488BE500A08A07 /* Roboto-Regular.ttf */; };
+		0F237EE029488BE500A08A07 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237ED929488BE500A08A07 /* Poppins-Medium.ttf */; };
+		0F237EE129488BE500A08A07 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237EDA29488BE500A08A07 /* Poppins-SemiBold.ttf */; };
+		0F237EE229488BE500A08A07 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F237EDB29488BE500A08A07 /* Roboto-Medium.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -30,6 +37,13 @@
 		00E356EE1AD99517003FC87E /* ctbookerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ctbookerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ctbookerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ctbookerTests.m; sourceTree = "<group>"; };
+		0F237ED529488BE500A08A07 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		0F237ED629488BE500A08A07 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		0F237ED729488BE500A08A07 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		0F237ED829488BE500A08A07 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		0F237ED929488BE500A08A07 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		0F237EDA29488BE500A08A07 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		0F237EDB29488BE500A08A07 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ctbooker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ctbooker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ctbooker/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ctbooker/AppDelegate.mm; sourceTree = "<group>"; };
@@ -83,9 +97,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0F237ED229488B5600A08A07 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0F237ED529488BE500A08A07 /* Poppins-Bold.ttf */,
+				0F237ED729488BE500A08A07 /* Poppins-Light.ttf */,
+				0F237ED929488BE500A08A07 /* Poppins-Medium.ttf */,
+				0F237EDA29488BE500A08A07 /* Poppins-SemiBold.ttf */,
+				0F237ED629488BE500A08A07 /* Roboto-Bold.ttf */,
+				0F237EDB29488BE500A08A07 /* Roboto-Medium.ttf */,
+				0F237ED829488BE500A08A07 /* Roboto-Regular.ttf */,
+			);
+			name = fonts;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* ctbooker */ = {
 			isa = PBXGroup;
 			children = (
+				0F237ED229488B5600A08A07 /* fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -242,8 +271,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F237EDF29488BE500A08A07 /* Roboto-Regular.ttf in Resources */,
+				0F237EE029488BE500A08A07 /* Poppins-Medium.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				0F237EDE29488BE500A08A07 /* Poppins-Light.ttf in Resources */,
+				0F237EDC29488BE500A08A07 /* Poppins-Bold.ttf in Resources */,
+				0F237EE129488BE500A08A07 /* Poppins-SemiBold.ttf in Resources */,
+				0F237EDD29488BE500A08A07 /* Roboto-Bold.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				0F237EE229488BE500A08A07 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +598,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -596,6 +632,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -633,7 +670,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -659,6 +696,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

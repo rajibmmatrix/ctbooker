@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 30,
-    width: 115,
+    minWidth: 115,
     paddingHorizontal: SIZES.H3 * 2, //6,
     flexDirection: 'row',
     alignItems: 'center',
