@@ -12,7 +12,7 @@ import {Button, Input} from '~common';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
 import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
-import {startLoading, stopLoading, useDispatch} from '~app';
+import {login, startLoading, stopLoading, useDispatch} from '~app';
 import {showToaster} from '~utils';
 
 interface Props {
@@ -58,29 +58,15 @@ const LoginScreen: FC<Props> = ({onMove}) => {
       return showToaster('Please enter a valid email and password', 'error');
     }
     dispatch(startLoading());
-    setTimeout(() => {
-      dispatch(stopLoading());
-      navigation.dispatch(
-        CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
-      );
-    }, 1500);
-    /* var formData = new FormData();
-    formData.append('email', form.email);
-    formData.append('password', form.password);
-    formData.append('lang', 'en');
-    dispatch(startLoading());
-    dispatch(login(formData as any))
+    dispatch(login(form))
       .unwrap()
-      .then(res => {
-        log(res);
+      .then(() => {
         navigation.dispatch(
           CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
         );
       })
-      .catch(() => {
-        //log(err);
-      })
-      .finally(() => dispatch(stopLoading())); */
+      .catch(() => {})
+      .finally(() => dispatch(stopLoading()));
   };
 
   return (

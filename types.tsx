@@ -98,8 +98,13 @@ export interface IVerify {
 }
 
 export interface ISignup {
-  full_name: string;
+  customer_type: number;
+  first_name?: string;
+  last_name?: string;
+  company_name?: string;
+  crn?: string;
   email: string;
+  password: string;
 }
 
 export interface ITranslation {
@@ -116,6 +121,7 @@ export interface ITranslation {
   profesonal_btn: string;
   fname: string;
   lname: string;
+  company_name: string;
   create_password: string;
   home_title: string;
   home_description: string;

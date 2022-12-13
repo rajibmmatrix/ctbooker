@@ -13,8 +13,8 @@ const API = axios.create({
 API.interceptors.response.use(
   function (response) {
     console.log('Response: ' + JSON.stringify(response));
-    if (response.data?.status && response.data?.status !== 0) {
-      return response;
+    if (response.data?.status && response.data.status !== 0) {
+      return response.data;
     } else {
       const message = response.data?.message;
       return Promise.reject(message);
@@ -25,6 +25,10 @@ API.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export const setLang = (LANG: string) => {
+  return (API.defaults.headers.common.lang = LANG);
+};
 
 export const setApiToken = (AUTH_TOKEN: string) => {
   return (API.defaults.headers.common.Authorization = `Bearer ${AUTH_TOKEN}`);

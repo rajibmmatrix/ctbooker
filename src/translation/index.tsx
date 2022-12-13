@@ -62,6 +62,7 @@ export default function Translations({children}: Props) {
       }
       setLoading(false);
       const data = await storage.getLanguageType();
+      api.setLang(data);
       dispatch({type: Actions.Set_Language, payload: data});
     })();
   }, []);
@@ -69,6 +70,7 @@ export default function Translations({children}: Props) {
   const actions = useMemo(
     () => ({
       setLanguage: async (data: IType) => {
+        api.setLang(data);
         await storage.setLanguageType(data);
         dispatch({type: Actions.Change_Language, payload: data});
       },

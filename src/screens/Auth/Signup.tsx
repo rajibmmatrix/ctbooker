@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthButton, Button, Input} from '~components';
 import {Icons, IMAGES} from '~constants';
-import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
 import {useTranslations} from '~translation';
+import {signup, startLoading, stopLoading, useDispatch} from '~app';
+import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
+import {showToaster} from '~utils';
 
 interface Props {
   onMove: () => void;
@@ -19,10 +22,84 @@ interface Props {
 
 type ITabs = 'individual' | 'profesonal' | null;
 
+interface INPUT {
+  first_name?: string;
+  last_name?: string;
+  company_name?: string;
+  crn?: string;
+  email: string;
+  password: string;
+}
+
+const fdata = {
+  first_name: '',
+  last_name: '',
+  company_name: '',
+  crn: '',
+  email: '',
+  password: '',
+};
+
 const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const {translation} = useTranslations();
   const [tabs, setTabs] = useState<ITabs>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [form, setForm] = useState<INPUT>(fdata);
+  const [error, setError] = useState<INPUT>(fdata);
+
+  const checkValidation = () => {
+    let status = false;
+    const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
+    const isError = fdata;
+    if (tabs === 'individual' && !form?.first_name?.trim()) {
+      status = true;
+      isError.first_name = 'First Name is required.';
+    }
+    if (tabs === 'individual' && !form?.last_name?.trim()) {
+      status = true;
+      isError.last_name = 'Last Name is required.';
+    }
+    if (tabs === 'profesonal' && !form?.company_name?.trim()) {
+      status = true;
+      isError.company_name = 'Company Name is required.';
+    }
+    if (tabs === 'profesonal' && !form?.crn?.trim()) {
+      status = true;
+      isError.crn = 'CRN is required.';
+    }
+    if (!form.email.trim()) {
+      status = true;
+      isError.email = 'Email is required.';
+    } else if (!reg.test(form.email.trim())) {
+      status = true;
+      isError.email = 'Email not valid.';
+    }
+    if (!form.password.trim()) {
+      status = true;
+      isError.password = 'Password is required.';
+    }
+    setError(isError);
+    return status;
+  };
+
+  const handleSignup = () => {
+    if (checkValidation()) {
+      return showToaster('Please fillup all the fields', 'error');
+    }
+    const params = {...form, customer_type: tabs === 'individual' ? 0 : 1};
+    dispatch(startLoading());
+    dispatch(signup(params))
+      .unwrap()
+      .then(() => {
+        navigation.dispatch(
+          CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
+        );
+      })
+      .catch(() => {})
+      .finally(() => dispatch(stopLoading()));
+  };
 
   return (
     <ImageBackground
@@ -73,28 +150,75 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
         />
         {tabs ? (
           <View style={styles.subBody}>
-            <Input
-              title={translation.fname}
-              Icon={Icons.User}
-              placeholder={translation.fname}
-            />
-            <Input
-              title={translation.lname}
-              Icon={Icons.User}
-              placeholder={translation.lname}
-            />
+            {tabs === 'individual' ? (
+              <>
+                <Input
+                  title={translation.fname}
+                  Icon={Icons.User}
+                  placeholder={translation.fname}
+                  onChangeText={(e: string) => {
+                    setForm(prev => ({...prev, first_name: e}));
+                  }}
+                  value={form.first_name}
+                  error={!!error.first_name}
+                />
+                <Input
+                  title={translation.lname}
+                  Icon={Icons.User}
+                  placeholder={translation.lname}
+                  onChangeText={(e: string) => {
+                    setForm(prev => ({...prev, last_name: e}));
+                  }}
+                  value={form.last_name}
+                  error={!!error.last_name}
+                />
+              </>
+            ) : (
+              <>
+                <Input
+                  title={translation.company_name}
+                  Icon={Icons.User}
+                  placeholder={translation.company_name}
+                  onChangeText={(e: string) => {
+                    setForm(prev => ({...prev, company_name: e}));
+                  }}
+                  value={form.company_name}
+                  error={!!error.company_name}
+                />
+                <Input
+                  title="CRN"
+                  Icon={Icons.User}
+                  placeholder="CRN"
+                  onChangeText={(e: string) => {
+                    setForm(prev => ({...prev, crn: e}));
+                  }}
+                  value={form.crn}
+                  error={!!error.crn}
+                />
+              </>
+            )}
             <Input
               title={translation.email}
               Icon={Icons.SMS}
               placeholder={translation.email}
               autoComplete="email"
               autoCapitalize="none"
+              onChangeText={(e: string) => {
+                setForm(prev => ({...prev, email: e}));
+              }}
+              value={form.email}
+              error={!!error.email}
             />
             <Input
               title={translation.password}
               Icon={Icons.Lock}
               placeholder={translation.password}
               secureTextEntry={true}
+              onChangeText={(e: string) => {
+                setForm(prev => ({...prev, password: e}));
+              }}
+              value={form.password}
+              error={!!error.password}
             />
             <View style={styles.footer}>
               <TouchableOpacity onPress={() => setIsSelected(prev => !prev)}>
@@ -110,7 +234,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
               <Button
                 title={translation.signup_button}
                 disabled={!isSelected}
-                onPress={() => {}}
+                onPress={handleSignup}
               />
             </View>
           </View>

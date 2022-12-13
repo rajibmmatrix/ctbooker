@@ -38,9 +38,8 @@ export const login = createAsyncThunk(
   async (params: ILogin, thunkAPI) => {
     try {
       const {data, message}: any = await api.signIn(params);
-      console.log('Data: ', data);
       api.setApiToken(data.access_token);
-      await storage.setToken(data.access_token);
+      //await storage.setToken(data.access_token);
       showToaster(message, 'success');
       return data.user_data;
     } catch (error: any) {
@@ -71,6 +70,7 @@ export const signup = createAsyncThunk(
   async (params: ISignup, thunkAPI) => {
     try {
       const {data} = await api.signUp(params);
+      console.log({data});
       api.setApiToken(data.token);
       await storage.setToken(data.token);
       showToaster(data.message, 'success');
