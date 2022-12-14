@@ -8,7 +8,7 @@ export const URL = {
   details: '/api/lang-json?type=client',
 
   //Auth
-  getUser: '/auth/customer',
+  getUser: '/api/v1/auth/get-user',
   login: '/api/v1/auth/login',
   signup: '/api/v1/auth/signup',
   forgot: '/api/v1/auth/forgot-password',

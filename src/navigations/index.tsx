@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {BackHandler} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AuthScreen, ForgotScreen, LogoutScreen, SplashScreen} from '~screens';
+import {AuthScreen, ForgotScreen, SplashScreen} from '~screens';
 import {UpdateModal} from '~components';
 import Sidebar from './SideNavigation';
 import config from '~config';
@@ -76,7 +76,6 @@ export default function Navigation() {
           <Stack.Screen name="Forgot" component={ForgotScreen} />
         </Stack.Group>
         <Stack.Screen name="Sidebar" component={Sidebar} />
-        <Stack.Screen name="Logout" component={LogoutScreen} />
       </Stack.Navigator>
       <UpdateModal
         show={showModal}

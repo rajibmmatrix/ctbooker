@@ -21,7 +21,6 @@ export type StackParamList = {
 
   //App Screens
   Sidebar: NavigatorScreenParams<SideParamList> | undefined;
-  Logout: undefined;
 };
 
 export type IBooking = 'Technical Control' | 'Against Visit' | 'Car Repair';
@@ -89,12 +88,8 @@ export interface ILogin {
   password: string;
 }
 
-export interface IVerify {
-  phone_no: string;
-  otp: string;
-  device_id?: string;
-  device_model?: string;
-  device_type?: string;
+export interface IForgot {
+  email: string;
 }
 
 export interface ISignup {

@@ -57,7 +57,7 @@ export const authSlice = createSlice({
       },
     );
     builder.addCase(forgot.fulfilled, (state: AuthState, action: any) => {
-      state.user = action.payload?.profile;
+      state.user = action.payload;
       state.error = null;
     });
     builder.addCase(

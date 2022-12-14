@@ -1,19 +1,12 @@
 import React, {FC, memo} from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Dimensions,
-} from 'react-native';
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-} from '@react-navigation/drawer';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {CommonActions} from '@react-navigation/native';
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {SvgProps} from 'react-native-svg';
-import {COLORS, FONTS, fontSize, _styles} from '~styles';
 import {useTranslations} from '~translation';
 import {Icons} from '~constants';
+import {COLORS, FONTS, fontSize, screenHeight, SIZES, _styles} from '~styles';
+import {loading, logout, useDispatch} from '~app';
 
 interface Props {
   title: string;
@@ -31,10 +24,24 @@ const Item: FC<Props> = memo(({title, Icon, onPress}) => {
 });
 
 const CustomSidebar: FC<DrawerContentComponentProps> = props => {
+  const dispatch = useDispatch();
   const {translation} = useTranslations();
 
+  const handleLogout = async () => {
+    dispatch(loading(true));
+    dispatch(logout())
+      .unwrap()
+      .then(() => {
+        props.navigation.dispatch(
+          CommonActions.reset({index: 1, routes: [{name: 'Auth'}]}),
+        );
+      })
+      .catch(() => {})
+      .finally(() => dispatch(loading(false)));
+  };
+
   return (
-    <DrawerContentScrollView {...props} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.main}>
         <View style={_styles.container}>
           <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
@@ -59,10 +66,10 @@ const CustomSidebar: FC<DrawerContentComponentProps> = props => {
         <Item
           title={translation.signout}
           Icon={Icons.Signout}
-          onPress={() => props.navigation.navigate('Logout')}
+          onPress={handleLogout}
         />
       </View>
-    </DrawerContentScrollView>
+    </View>
   );
 };
 
@@ -79,13 +86,13 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    paddingTop: 24,
+    paddingTop: SIZES.V12 * 2,
     paddingLeft: 19,
-    paddingBottom: 55,
-    height: Dimensions.get('window').height - 20,
+    paddingBottom: SIZES.V110 / 2,
+    height: screenHeight - 20,
   },
   item: {
-    marginTop: 24,
+    marginTop: SIZES.V12 * 2,
     flexDirection: 'row',
     alignItems: 'center',
   },

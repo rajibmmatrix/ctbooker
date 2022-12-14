@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '~config';
 import {URL} from '~constants';
-import {ILogin, ISignup, IVerify} from 'types';
+import {IForgot, ILogin, ISignup} from 'types';
 
 const API = axios.create({
   baseURL: config.baseURL,
@@ -47,6 +47,6 @@ export const getLanguage = () => axios.get(config.baseURL + URL.lang);
 export const getUser = () => API.get(URL.getUser);
 export const signIn = (params: ILogin) => API.post(URL.login, params);
 export const signUp = (params: ISignup) => API.post(URL.signup, params);
-export const forgot = (params: IVerify) => API.post(URL.forgot, params);
+export const forgot = (params: IForgot) => API.post(URL.forgot, params);
 
 export default API;

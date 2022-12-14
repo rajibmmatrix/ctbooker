@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {api, showToaster, storage} from '~utils';
-import {ILogin, ISignup, IVerify} from 'types';
+import {ILogin, ISignup, IForgot} from 'types';
 
 //For Check user login or not
 export const checkLogin = createAsyncThunk(
@@ -13,7 +13,9 @@ export const checkLogin = createAsyncThunk(
       }
       api.setApiToken(token);
       const {data} = await api.getUser();
-      return {isLogin: true, user: data.data};
+      api.setApiToken(data.access_token);
+      await storage.setToken(data.access_token);
+      return {isLogin: true, user: data.user_data};
     } catch (error: any) {
       showToaster(error, 'error');
       return thunkAPI.rejectWithValue(error);
@@ -25,7 +27,9 @@ export const checkLogin = createAsyncThunk(
 export const getUser = createAsyncThunk('auth/getuser', async (_, thunkAPI) => {
   try {
     const {data} = await api.getUser();
-    return data.data;
+    api.setApiToken(data.access_token);
+    await storage.setToken(data.access_token);
+    return data.user_data;
   } catch (error: any) {
     showToaster(error, 'error');
     return thunkAPI.rejectWithValue(error);
@@ -67,11 +71,11 @@ export const signup = createAsyncThunk(
 //For forgot user
 export const forgot = createAsyncThunk(
   'auth/forgot',
-  async (params: IVerify, thunkAPI) => {
+  async (params: IForgot, thunkAPI) => {
     try {
-      const {data} = await api.forgot(params);
-      showToaster(data.message, 'success');
-      return data.data;
+      const {message}: any = await api.forgot(params);
+      showToaster(message, 'success');
+      return params;
     } catch (error: any) {
       showToaster(error, 'error');
       return thunkAPI.rejectWithValue(error);

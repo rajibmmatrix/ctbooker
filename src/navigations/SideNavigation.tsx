@@ -22,6 +22,7 @@ export default function Sidebar() {
       drawerContent={props => <CustomSidebar {...props} />}
       screenOptions={{
         headerShown: false,
+        drawerType: 'front',
         drawerStyle: {backgroundColor: 'transparent'},
       }}>
       <Drawer.Screen name="Tab" component={Tabs} />
