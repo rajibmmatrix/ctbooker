@@ -39,9 +39,24 @@ export const login = createAsyncThunk(
     try {
       const {data, message}: any = await api.signIn(params);
       api.setApiToken(data.access_token);
-      //await storage.setToken(data.access_token);
+      await storage.setToken(data.access_token);
       showToaster(message, 'success');
       return data.user_data;
+    } catch (error: any) {
+      showToaster(error, 'error');
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
+//For signup user
+export const signup = createAsyncThunk(
+  'auth/signup',
+  async (params: ISignup, thunkAPI) => {
+    try {
+      const {message}: any = await api.signUp(params);
+      showToaster(message, 'success');
+      return {email: params.email};
     } catch (error: any) {
       showToaster(error, 'error');
       return thunkAPI.rejectWithValue(error);
@@ -55,24 +70,6 @@ export const forgot = createAsyncThunk(
   async (params: IVerify, thunkAPI) => {
     try {
       const {data} = await api.forgot(params);
-      showToaster(data.message, 'success');
-      return data.data;
-    } catch (error: any) {
-      showToaster(error, 'error');
-      return thunkAPI.rejectWithValue(error);
-    }
-  },
-);
-
-//For signup user
-export const signup = createAsyncThunk(
-  'auth/signup',
-  async (params: ISignup, thunkAPI) => {
-    try {
-      const {data} = await api.signUp(params);
-      console.log({data});
-      api.setApiToken(data.token);
-      await storage.setToken(data.token);
       showToaster(data.message, 'success');
       return data.data;
     } catch (error: any) {

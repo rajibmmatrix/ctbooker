@@ -98,7 +98,7 @@ export interface IVerify {
 }
 
 export interface ISignup {
-  customer_type: number;
+  customer_type: '0' | '1' | string;
   first_name?: string;
   last_name?: string;
   company_name?: string;
@@ -123,6 +123,8 @@ export interface ITranslation {
   lname: string;
   company_name: string;
   create_password: string;
+  login_error: string;
+  signup_error: string;
   home_title: string;
   home_description: string;
   booking: string;

@@ -3,16 +3,13 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 import {checkLogin, getUser, login, logout, signup, forgot} from './authAction';
 
 export interface IUser {
-  name?: string;
-  email?: string;
-  phone_no: string;
-  image?: string;
-  address?: [];
-  date_of_birth?: string;
-  gender?: string;
-  //for login
-  otp?: string;
-  new_user?: boolean;
+  id?: number;
+  first_name?: string;
+  last_name?: string;
+  company_name?: string;
+  crn?: string;
+  email: string;
+  user_type?: string;
 }
 
 export interface AuthState {
@@ -52,18 +49,17 @@ export const authSlice = createSlice({
         state.error = null;
       },
     );
-    builder.addCase(forgot.fulfilled, (state: AuthState, action: any) => {
-      state.user = action.payload?.profile;
-      state.error = null;
-    });
     builder.addCase(
       signup.fulfilled,
       (state: AuthState, action: PayloadAction<IUser>) => {
-        state.isLoggedin = true;
         state.user = action.payload;
         state.error = null;
       },
     );
+    builder.addCase(forgot.fulfilled, (state: AuthState, action: any) => {
+      state.user = action.payload?.profile;
+      state.error = null;
+    });
     builder.addCase(
       logout.fulfilled,
       (state: AuthState, action: PayloadAction<boolean>) => {

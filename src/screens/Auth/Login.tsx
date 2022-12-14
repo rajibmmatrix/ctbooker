@@ -12,7 +12,7 @@ import {Button, Input} from '~common';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
 import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
-import {login, startLoading, stopLoading, useDispatch} from '~app';
+import {login, startLoading, stopLoading, useDispatch, useSelector} from '~app';
 import {showToaster} from '~utils';
 
 interface Props {
@@ -24,8 +24,10 @@ const LoginScreen: FC<Props> = ({onMove}) => {
   const navigation = useNavigation();
   const {translation} = useTranslations();
 
+  const user = useSelector(store => store.auth.user);
+
   const [form, setForm] = useState<{email: string; password: string}>({
-    email: '',
+    email: user?.email ? user.email : '',
     password: '',
   });
 
@@ -55,7 +57,7 @@ const LoginScreen: FC<Props> = ({onMove}) => {
 
   const handleLogin = () => {
     if (checkValidation()) {
-      return showToaster('Please enter a valid email and password', 'error');
+      return showToaster(translation.login_error, 'error');
     }
     dispatch(startLoading());
     dispatch(login(form))
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingBottom: 0,
     backgroundColor: 'transparent',
-    height: screenHeight * 0.4,
+    minHeight: screenHeight * 0.37,
   },
   cardbody: {
     resizeMode: 'stretch',
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    marginTop: SIZES.V45, //45,
+    marginTop: SIZES.V45 * 0.8, //45,
     paddingHorizontal: SIZES.H15 * 2, //30,
   },
   link: {

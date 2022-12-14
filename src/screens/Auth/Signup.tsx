@@ -6,12 +6,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {CommonActions, useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthButton, Button, Input} from '~components';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
-import {signup, startLoading, stopLoading, useDispatch} from '~app';
+import {signup, loading, useDispatch} from '~app';
 import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
 import {showToaster} from '~utils';
 
@@ -42,7 +41,6 @@ const fdata = {
 
 const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const {translation} = useTranslations();
   const [tabs, setTabs] = useState<ITabs>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -86,19 +84,22 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
 
   const handleSignup = () => {
     if (checkValidation()) {
-      return showToaster('Please fillup all the fields', 'error');
+      return showToaster(translation.signup_error, 'error');
     }
-    const params = {...form, customer_type: tabs === 'individual' ? 0 : 1};
-    dispatch(startLoading());
+    let params = {...form, customer_type: tabs === 'individual' ? '0' : '1'};
+    if (tabs === 'individual') {
+      delete params.company_name;
+      delete params.crn;
+    } else if (tabs === 'profesonal') {
+      delete params.first_name;
+      delete params.last_name;
+    }
+    dispatch(loading(true));
     dispatch(signup(params))
       .unwrap()
-      .then(() => {
-        navigation.dispatch(
-          CommonActions.reset({index: 1, routes: [{name: 'Sidebar'}]}),
-        );
-      })
+      .then(() => onMove())
       .catch(() => {})
-      .finally(() => dispatch(stopLoading()));
+      .finally(() => dispatch(loading(false)));
   };
 
   return (
