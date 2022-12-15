@@ -112,6 +112,10 @@ export interface ITranslation {
   login_button: string;
   signup_button: string;
   termes_and_conditions: string;
+  forgot_title: string;
+  already_have_account: string;
+  send: string;
+  enter_email: string;
   individual_btn: string;
   profesonal_btn: string;
   fname: string;

@@ -13,8 +13,6 @@ export const checkLogin = createAsyncThunk(
       }
       api.setApiToken(token);
       const {data} = await api.getUser();
-      api.setApiToken(data.access_token);
-      await storage.setToken(data.access_token);
       return {isLogin: true, user: data.user_data};
     } catch (error: any) {
       showToaster(error, 'error');
@@ -27,8 +25,6 @@ export const checkLogin = createAsyncThunk(
 export const getUser = createAsyncThunk('auth/getuser', async (_, thunkAPI) => {
   try {
     const {data} = await api.getUser();
-    api.setApiToken(data.access_token);
-    await storage.setToken(data.access_token);
     return data.user_data;
   } catch (error: any) {
     showToaster(error, 'error');

@@ -66,12 +66,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: FONTS.Primary_Bold,
     textAlign: 'center',
+    color: COLORS.Light,
   },
   description: {
     fontSize: fontSize(15),
     fontWeight: '500',
     fontFamily: FONTS.Primary_Medium,
     textAlign: 'center',
+    color: COLORS.Light,
     marginTop: SIZES.V22,
   },
   button: {

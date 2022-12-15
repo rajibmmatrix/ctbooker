@@ -49,14 +49,11 @@ export const authSlice = createSlice({
         state.error = null;
       },
     );
-    builder.addCase(
-      signup.fulfilled,
-      (state: AuthState, action: PayloadAction<IUser>) => {
-        state.user = action.payload;
-        state.error = null;
-      },
-    );
-    builder.addCase(forgot.fulfilled, (state: AuthState, action: any) => {
+    builder.addCase(signup.fulfilled, (state: AuthState, action) => {
+      state.user = action.payload;
+      state.error = null;
+    });
+    builder.addCase(forgot.fulfilled, (state: AuthState, action) => {
       state.user = action.payload;
       state.error = null;
     });
