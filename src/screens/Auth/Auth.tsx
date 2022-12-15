@@ -4,7 +4,6 @@ import {
   ScrollView,
   StyleSheet,
   View,
-  Dimensions,
   Text,
 } from 'react-native';
 import {Container} from '~components';
@@ -12,10 +11,8 @@ import SignupScreen from './Signup';
 import LoginScreen from './Login';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
-import {COLORS, SIZES, _styles} from '~styles';
+import {COLORS, screenHeight, SIZES, statusHeight, _styles} from '~styles';
 import {StackScreenProps} from 'types';
-
-const {height} = Dimensions.get('window');
 
 export default function AuthScreen({}: StackScreenProps<'Auth'>) {
   const {translation} = useTranslations();
@@ -66,14 +63,14 @@ const styles = StyleSheet.create({
     paddingTop: SIZES.V38 * 1.22, //76,
     //paddingBottom: 220, // SIZES.V110 * 2, //220,
     paddingHorizontal: SIZES.H28, //28,
-    minHeight: height,
+    minHeight: screenHeight - statusHeight,
   },
   signupContainer: {
     flex: 1,
     paddingTop: SIZES.V38 * 1.35, //76,
     paddingBottom: SIZES.V195 * 1.35, //395,
     paddingHorizontal: SIZES.H28, //28,
-    minHeight: height + 175,
+    minHeight: screenHeight + 175,
   },
   logo: {
     alignSelf: 'center',

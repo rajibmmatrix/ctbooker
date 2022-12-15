@@ -12,7 +12,7 @@ import {Button, Container, Input} from '~components';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
 import {forgot, loading, useDispatch} from '~app';
-import {COLORS, screenHeight, SIZES, _styles} from '~styles';
+import {COLORS, screenHeight, SIZES, statusHeight, _styles} from '~styles';
 import {showToaster} from '~utils';
 import {StackScreenProps} from 'types';
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: SIZES.V38 * 1.22, //76,
     paddingHorizontal: SIZES.H28, //28,
-    minHeight: screenHeight - 80,
+    minHeight: screenHeight - statusHeight,
   },
   logo: {
     alignSelf: 'center',

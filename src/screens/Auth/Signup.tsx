@@ -251,8 +251,9 @@ const styles = StyleSheet.create({
   card: {
     padding: SIZES.H10, //10,
     width: '100%',
+    paddingBottom: 0,
     backgroundColor: 'transparent',
-    height: screenHeight * 0.4,
+    minHeight: screenHeight * 0.37,
   },
   bigCard: {
     width: '100%',

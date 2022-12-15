@@ -1,4 +1,6 @@
-import {Dimensions, PixelRatio, Platform} from 'react-native';
+import {Dimensions, PixelRatio, Platform, StatusBar} from 'react-native';
+
+export const statusHeight = StatusBar.currentHeight || 80;
 
 export const screenWidth = Dimensions.get('window').width;
 

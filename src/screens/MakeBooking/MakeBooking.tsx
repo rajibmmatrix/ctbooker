@@ -102,6 +102,7 @@ export default function MakeBookingScreen({
               <Icons.NoteText />
               <TextInput
                 placeholder={translation.vehicle_problem}
+                placeholderTextColor={COLORS.Secondary_Text}
                 numberOfLines={4}
                 style={[styles.input, styles.inputBox]}
               />
