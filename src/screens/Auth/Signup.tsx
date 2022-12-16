@@ -39,52 +39,71 @@ const fdata = {
   password: '',
 };
 
+const errors = {
+  first_name: false,
+  last_name: false,
+  company_name: false,
+  crn: false,
+  email: false,
+  password: false,
+};
+
 const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
   const dispatch = useDispatch();
   const {translation} = useTranslations();
   const [tabs, setTabs] = useState<ITabs>(null);
   const [isSelected, setIsSelected] = useState<boolean>(false);
-  const [form, setForm] = useState<INPUT>(fdata);
-  const [error, setError] = useState<INPUT>(fdata);
+  const [form, setForm] = useState<INPUT>({...fdata});
+  const [error, setError] = useState({...errors});
 
-  const checkValidation = () => {
+  const checkValidation = async () => {
     let status = false;
+    let isEmailValide = true;
     const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
-    const isError = fdata;
+    let isError = {...errors};
+    setError(isError);
     if (tabs === 'individual' && !form?.first_name?.trim()) {
       status = true;
-      isError.first_name = 'First Name is required.';
+      isError.first_name = true;
     }
     if (tabs === 'individual' && !form?.last_name?.trim()) {
       status = true;
-      isError.last_name = 'Last Name is required.';
+      isError.last_name = true;
     }
     if (tabs === 'profesonal' && !form?.company_name?.trim()) {
       status = true;
-      isError.company_name = 'Company Name is required.';
+      isError.company_name = true;
     }
     if (tabs === 'profesonal' && !form?.crn?.trim()) {
       status = true;
-      isError.crn = 'CRN is required.';
+      isError.crn = true;
     }
     if (!form.email.trim()) {
       status = true;
-      isError.email = 'Email is required.';
-    } else if (!reg.test(form.email.trim())) {
+      isError.email = true;
+    } else if (!reg.test(form.email)) {
       status = true;
-      isError.email = 'Email not valid.';
+      isEmailValide = false;
+      isError.email = true;
     }
     if (!form.password.trim()) {
       status = true;
-      isError.password = 'Password is required.';
+      isError.password = true;
+    } else if (form.password.trim().length < 8) {
+      status = true;
+      isError.password = true;
     }
     setError(isError);
-    return status;
+    return {status, isEmailValide};
   };
 
-  const handleSignup = () => {
-    if (checkValidation()) {
-      return showToaster(translation.signup_error, 'error');
+  const handleSignup = async () => {
+    const {status, isEmailValide} = await checkValidation();
+    if (status) {
+      return showToaster(
+        !isEmailValide ? translation.enter_email : translation.signup_error,
+        'error',
+      );
     }
     let params = {...form, customer_type: tabs === 'individual' ? '0' : '1'};
     if (tabs === 'individual') {
@@ -161,7 +180,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
                     setForm(prev => ({...prev, first_name: e}));
                   }}
                   value={form.first_name}
-                  error={!!error.first_name}
+                  error={error.first_name}
                 />
                 <Input
                   title={translation.lname}
@@ -171,7 +190,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
                     setForm(prev => ({...prev, last_name: e}));
                   }}
                   value={form.last_name}
-                  error={!!error.last_name}
+                  error={error.last_name}
                 />
               </>
             ) : (
@@ -194,7 +213,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
                     setForm(prev => ({...prev, crn: e}));
                   }}
                   value={form.crn}
-                  error={!!error.crn}
+                  error={error.crn}
                 />
               </>
             )}
@@ -208,7 +227,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
                 setForm(prev => ({...prev, email: e}));
               }}
               value={form.email}
-              error={!!error.email}
+              error={error.email}
             />
             <Input
               title={translation.password}
@@ -219,7 +238,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
                 setForm(prev => ({...prev, password: e}));
               }}
               value={form.password}
-              error={!!error.password}
+              error={error.password}
             />
             <View style={styles.footer}>
               <TouchableOpacity onPress={() => setIsSelected(prev => !prev)}>

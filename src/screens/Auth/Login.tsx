@@ -39,7 +39,7 @@ const LoginScreen: FC<Props> = ({onMove}) => {
   const checkValidation = () => {
     let status = false;
     const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
-    const isError = {email: '', password: ''};
+    let isError = {email: '', password: ''};
     if (!form.email.trim()) {
       status = true;
       isError.email = 'Email is required.';
@@ -47,7 +47,7 @@ const LoginScreen: FC<Props> = ({onMove}) => {
       status = true;
       isError.email = 'Email not valid.';
     }
-    if (!form.password.trim()) {
+    if (!form.password.trim() || form.password.trim().length < 8) {
       status = true;
       isError.password = 'Password is required.';
     }
