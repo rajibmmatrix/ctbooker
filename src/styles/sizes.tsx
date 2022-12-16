@@ -1,6 +1,7 @@
 import {Dimensions, PixelRatio, Platform, StatusBar} from 'react-native';
 
-export const statusHeight = StatusBar.currentHeight || 80;
+export const statusHeight =
+  Platform.OS === 'android' ? 0 : StatusBar.currentHeight || 80;
 
 export const screenWidth = Dimensions.get('window').width;
 
