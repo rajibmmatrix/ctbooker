@@ -59,6 +59,7 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
   const checkValidation = async () => {
     let status = false;
     let isEmailValide = true;
+    let isPasswordValide = true;
     const reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
     let isError = {...errors};
     setError(isError);
@@ -92,16 +93,21 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
     } else if (form.password.trim().length < 8) {
       status = true;
       isError.password = true;
+      isPasswordValide = false;
     }
     setError(isError);
-    return {status, isEmailValide};
+    return {status, isEmailValide, isPasswordValide};
   };
 
   const handleSignup = async () => {
-    const {status, isEmailValide} = await checkValidation();
+    const {status, isEmailValide, isPasswordValide} = await checkValidation();
     if (status) {
       return showToaster(
-        !isEmailValide ? translation.enter_email : translation.signup_error,
+        !isEmailValide
+          ? translation.enter_email
+          : !isPasswordValide
+          ? translation.password_error
+          : translation.signup_error,
         'error',
       );
     }
@@ -240,16 +246,16 @@ const SignupScreen: FC<Props> = ({onMove, showSignup}) => {
               value={form.password}
               error={error.password}
             />
-            <View style={styles.footer}>
-              <TouchableOpacity onPress={() => setIsSelected(prev => !prev)}>
+            <TouchableOpacity onPress={() => setIsSelected(prev => !prev)}>
+              <View style={styles.footer}>
                 <View
                   style={isSelected ? styles.selected : styles.unSelected}
                 />
-              </TouchableOpacity>
-              <Text style={[_styles.link, styles.footerTitle]}>
-                {translation.termes_and_conditions}
-              </Text>
-            </View>
+                <Text style={[_styles.link, styles.footerTitle]}>
+                  {translation.termes_and_conditions}
+                </Text>
+              </View>
+            </TouchableOpacity>
             <View style={styles.footerButton}>
               <Button
                 title={translation.signup_button}

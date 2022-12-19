@@ -11,8 +11,8 @@ import {useNavigation, CommonActions} from '@react-navigation/native';
 import {Button, Input} from '~common';
 import {Icons, IMAGES} from '~constants';
 import {useTranslations} from '~translation';
+import {login, startLoading, stopLoading, useDispatch} from '~app';
 import {COLORS, FONTS, screenHeight, SIZES, _styles} from '~styles';
-import {login, startLoading, stopLoading, useDispatch, useSelector} from '~app';
 import {showToaster} from '~utils';
 
 interface Props {
@@ -24,10 +24,8 @@ const LoginScreen: FC<Props> = ({onMove}) => {
   const navigation = useNavigation();
   const {translation} = useTranslations();
 
-  const user = useSelector(store => store.auth.user);
-
   const [form, setForm] = useState<{email: string; password: string}>({
-    email: user?.email ? user.email : '',
+    email: '',
     password: '',
   });
 
