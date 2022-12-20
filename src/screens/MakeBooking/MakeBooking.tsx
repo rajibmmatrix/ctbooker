@@ -14,6 +14,7 @@ import {
   Container,
   DateTimePicker,
   RadioButton,
+  Calendars,
 } from '~components';
 import {useTranslations} from '~translation';
 import {Icons} from '~constants';
@@ -28,11 +29,15 @@ export default function MakeBookingScreen({
   const {type} = route.params;
   const dispatch = useDispatch();
   const {translation} = useTranslations();
+
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState<Date | null>(null);
-  const [showDateTime, setShowDateTime] = useState<boolean>(false);
+  const [showTime, setShowTime] = useState<boolean>(false);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [isTCSelected, setIsTCSelected] = useState<boolean>(false);
-  const [mode, setMode] = useState<'date' | 'time'>('date');
+  const [form, setForm] = useState<any>({
+    date: null,
+    time: null,
+  });
 
   useLayoutEffect(() => {
     if (type === 'Technical Control') {
@@ -45,10 +50,9 @@ export default function MakeBookingScreen({
     return () => setTitle('');
   }, [type, translation]);
 
-  const handelDate = (_: any, value: Date) => {
-    const currentDate = value;
-    setDate(currentDate);
-    setShowDateTime(false);
+  const handelTime = (_: any, value: Date) => {
+    setForm((prev: any) => ({...prev, time: value}));
+    setShowTime(false);
   };
 
   return (
@@ -58,23 +62,17 @@ export default function MakeBookingScreen({
         <BookingIconTitle
           title={translation.date_of_reservition}
           placeholder={translation.date}
-          value={date?.toLocaleDateString()}
+          value={form.date?.toLocaleDateString()}
           Icon={Icons.Calendar}
           disabled={true}
-          onPress={() => {
-            setShowDateTime(true);
-            setMode('date');
-          }}
+          onPress={() => setShowCalendar(true)}
         />
         <BookingIconTitle
           placeholder={translation.pickup_time}
-          value={date?.toLocaleTimeString()}
+          value={form.time?.toLocaleTimeString()}
           Icon={Icons.Clock}
           disabled={true}
-          onPress={() => {
-            setShowDateTime(true);
-            setMode('time');
-          }}
+          onPress={() => setShowTime(true)}
         />
         <BookingIconTitle
           value={translation.pickup_location}
@@ -149,10 +147,20 @@ export default function MakeBookingScreen({
           style={styles.footer}
         />
         <DateTimePicker
-          show={showDateTime}
-          mode={mode}
-          onChange={handelDate}
-          value={date}
+          show={showTime}
+          mode="time"
+          onChange={handelTime}
+          value={form.time}
+        />
+        <Calendars
+          show={showCalendar}
+          onDayPress={(e: any) => {
+            console.log(e);
+            setShowCalendar(false);
+          }}
+          onClose={() => {
+            setShowCalendar(false);
+          }}
         />
       </ScrollView>
     </Container>

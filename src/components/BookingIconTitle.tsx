@@ -54,6 +54,7 @@ export default memo(BookingIconTitle);
 const styles = StyleSheet.create({
   container: {
     height: 60,
+    width: '100%',
     justifyContent: 'center',
     marginBottom: 10,
     paddingBottom: 10,
