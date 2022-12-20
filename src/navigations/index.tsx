@@ -7,8 +7,8 @@ import {UpdateModal} from '~components';
 import Sidebar from './SideNavigation';
 import config from '~config';
 import {useTranslations} from '~translation';
-import {api, log, storage} from '~utils';
 import {loading, useDispatch} from '~app';
+import {api, navigation, showToaster, storage} from '~utils';
 import {StackParamList} from 'types';
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -49,7 +49,7 @@ export default function Navigation() {
           }
         }
       })
-      .catch(err => log(err));
+      .catch(err => showToaster(err.message, 'error'));
 
     return () => {};
   }, [updateLanguage, version, dispatch]);
@@ -68,7 +68,7 @@ export default function Navigation() {
   };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigation.navigationRef}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Group>

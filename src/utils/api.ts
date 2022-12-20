@@ -1,6 +1,8 @@
 import axios from 'axios';
 import config from '~config';
 import {URL} from '~constants';
+import {deleteToken} from './storage';
+import * as navigation from './navigationRef';
 import {IForgot, ILogin, ISignup} from 'types';
 
 const API = axios.create({
@@ -13,7 +15,6 @@ const API = axios.create({
 
 API.interceptors.response.use(
   function (response) {
-    console.log('Response: ' + JSON.stringify(response));
     if (response.data?.status && response.data.status !== 0) {
       return response.data;
     } else {
@@ -21,9 +22,19 @@ API.interceptors.response.use(
       return Promise.reject(message);
     }
   },
-  function (error) {
-    console.log('error: ' + error);
-    return Promise.reject(error);
+  async function (error) {
+    let message;
+    if (error.response) {
+      if (error.response.status === '401') {
+        removeApiToken();
+        await deleteToken();
+        navigation.reset('Auth');
+      }
+      message = error.response.data?.message;
+    } else {
+      message = error.message;
+    }
+    return Promise.reject(message);
   },
 );
 

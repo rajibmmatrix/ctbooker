@@ -11,7 +11,7 @@ import RNRestart from 'react-native-restart';
 import reducer, {Actions} from './reducer';
 import language from './lang.json';
 import config from '~config';
-import {api, log, storage} from '~utils';
+import {api, showToaster, storage} from '~utils';
 import {ITranslation} from 'types';
 
 interface Props {
@@ -83,7 +83,9 @@ export default function Translations({children}: Props) {
         RNRestart.Restart();
       },
       updateLanguage: async (v: string, callback?: any) => {
-        const data = await api.getLanguage().catch(err => log(err));
+        const data = await api
+          .getLanguage()
+          .catch(err => showToaster(err.message, 'error'));
         if (data?.data) {
           const lang_data = {lang: data.data, version: v};
           await storage.setLanguage(lang_data);
