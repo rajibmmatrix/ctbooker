@@ -15,7 +15,11 @@ const NetError: FC = () => {
   }, []);
 
   return (
-    <Modal visible={!isConnected} transparent style={_styles.container}>
+    <Modal
+      visible={!isConnected}
+      transparent
+      animationType="fade"
+      style={_styles.container}>
       <View style={styles.container}>
         <View style={styles.content}>
           <Image source={IMAGES.NoInternet} style={styles.logo} />
