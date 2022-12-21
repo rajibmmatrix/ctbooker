@@ -7,4 +7,5 @@ export const IMAGES = {
   Offer: require('../assets/images/offer.png'),
   Booking: require('../assets/images/booking.png'),
   Tabbar: require('../assets/images/tabbar.png'),
+  NoInternet: require('../assets/images/no-internet.png'),
 };

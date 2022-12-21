@@ -21,5 +21,6 @@ export const COLORS = {
   Dark_Card: '#1D1D1D',
   Others: ['#f2f2f2', '#ffffffde'],
   Primary_Modal: '#00000080',
+  Secondary_Modal: '#000000bf',
   Error: '#ff3333',
 };
