@@ -102,6 +102,20 @@ export interface ISignup {
   password: string;
 }
 
+export interface ICBooking {
+  booking_type: 'technical' | 'control' | 'repair' | string;
+  datetime: Date | null | string;
+  pickuptime: Date | null;
+  pickup_address: string;
+  pickup_latitude?: string;
+  pickup_longitude?: string;
+  drop_address: string;
+  drop_latitude?: string;
+  drop_longitude?: string;
+  same_address: boolean;
+  terms_conditions_verified: boolean;
+}
+
 export interface ITranslation {
   login_title: string;
   email: string;
@@ -161,4 +175,6 @@ export interface ITranslation {
   booking_history: string;
   service_type: string;
   car_details: string;
+  no_connection: string;
+  internet_error: string;
 }

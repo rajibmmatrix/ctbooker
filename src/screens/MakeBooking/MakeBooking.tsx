@@ -16,11 +16,21 @@ import {
   RadioButton,
   Calendars,
 } from '~components';
-import {useTranslations} from '~translation';
 import {Icons} from '~constants';
-import {COLORS, FONTS, fontSize, SIZES} from '~styles';
+import {useTranslations} from '~translation';
 import {loading, useDispatch} from '~app';
-import {SideScreenProps} from 'types';
+import {COLORS, FONTS, fontSize, SIZES} from '~styles';
+import {ICBooking, SideScreenProps} from 'types';
+
+const params: ICBooking = {
+  booking_type: '',
+  datetime: null,
+  pickuptime: null,
+  pickup_address: '',
+  drop_address: '',
+  same_address: false,
+  terms_conditions_verified: false,
+};
 
 export default function MakeBookingScreen({
   navigation,
@@ -33,11 +43,7 @@ export default function MakeBookingScreen({
   const [title, setTitle] = useState('');
   const [showTime, setShowTime] = useState<boolean>(false);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const [isTCSelected, setIsTCSelected] = useState<boolean>(false);
-  const [form, setForm] = useState<any>({
-    date: null,
-    time: null,
-  });
+  const [form, setForm] = useState<ICBooking>(params);
 
   useLayoutEffect(() => {
     if (type === 'Technical Control') {
@@ -50,49 +56,54 @@ export default function MakeBookingScreen({
     return () => setTitle('');
   }, [type, translation]);
 
-  const handelTime = (_: any, value: Date) => {
-    setForm((prev: any) => ({...prev, time: value}));
-    setShowTime(false);
-  };
-
   return (
     <Container>
       <BackHeader title={title} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <BookingIconTitle
+          Icon={Icons.Calendar}
           title={translation.date_of_reservition}
           placeholder={translation.date}
-          value={form.date?.toLocaleDateString()}
-          Icon={Icons.Calendar}
-          disabled={true}
+          value={form.datetime as string}
           onPress={() => setShowCalendar(true)}
-        />
-        <BookingIconTitle
-          placeholder={translation.pickup_time}
-          value={form.time?.toLocaleTimeString()}
-          Icon={Icons.Clock}
           disabled={true}
-          onPress={() => setShowTime(true)}
         />
         <BookingIconTitle
-          value={translation.pickup_location}
+          Icon={Icons.Clock}
+          placeholder={translation.pickup_time}
+          value={form.pickuptime?.toLocaleTimeString()}
+          onPress={() => setShowTime(true)}
+          disabled={true}
+        />
+        <BookingIconTitle
           Icon={Icons.Location}
+          placeholder={translation.pickup_location}
+          onChangeText={e => setForm(prev => ({...prev, pickup_address: e}))}
+          value={form.pickup_address}
         />
         <RadioButton
           title={translation.deposit_same_place}
-          isSelected={true}
-          onPress={() => {}}
+          isSelected={form.same_address}
+          onPress={() => {
+            setForm(prev => ({
+              ...prev,
+              same_address: true,
+              drop_address: prev.pickup_address,
+            }));
+          }}
           style={styles.radioButton}
         />
         <RadioButton
           title={translation.different_deposit_location}
-          isSelected={false}
-          onPress={() => {}}
+          isSelected={!form.same_address}
+          onPress={() => setForm(prev => ({...prev, same_address: false}))}
           style={styles.radioButton}
         />
         <BookingIconTitle
-          placeholder={translation.deposit_address}
           Icon={Icons.Routing}
+          placeholder={translation.deposit_address}
+          onChangeText={e => setForm(prev => ({...prev, drop_address: e}))}
+          value={form.drop_address}
         />
         {type === 'Car Repair' ? (
           <>
@@ -142,25 +153,33 @@ export default function MakeBookingScreen({
         </TouchableOpacity>
         <RadioButton
           title={translation.termes_and_conditions}
-          isSelected={isTCSelected}
-          onPress={() => setIsTCSelected(prev => !prev)}
+          isSelected={form.terms_conditions_verified}
+          onPress={() => {
+            setForm(prev => ({
+              ...prev,
+              terms_conditions_verified: !prev.terms_conditions_verified,
+            }));
+          }}
           style={styles.footer}
         />
         <DateTimePicker
           show={showTime}
           mode="time"
-          onChange={handelTime}
-          value={form.time}
+          onChange={(value: Date) => {
+            setForm(prev => ({...prev, pickuptime: value}));
+            setShowTime(false);
+          }}
+          onCancel={() => setShowTime(false)}
+          value={form.pickuptime}
         />
         <Calendars
+          initialDate={form.datetime as string}
           show={showCalendar}
           onDayPress={(e: any) => {
-            console.log(e);
+            setForm(prev => ({...prev, datetime: e.dateString}));
             setShowCalendar(false);
           }}
-          onClose={() => {
-            setShowCalendar(false);
-          }}
+          onClose={() => setShowCalendar(false)}
         />
       </ScrollView>
     </Container>
@@ -185,6 +204,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   inputContainer: {
+    minHeight: 90,
     paddingLeft: 16,
     flexDirection: 'row',
     alignItems: 'center',

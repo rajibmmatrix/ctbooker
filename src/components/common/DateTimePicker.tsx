@@ -1,29 +1,33 @@
 import React, {FC, memo} from 'react';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {COLORS} from '~styles';
 
 interface Props {
   show: boolean;
   mode: 'date' | 'time';
-  onChange: (event: any, value: any) => void;
+  onChange: (value: any) => void;
+  onCancel: () => void;
   value?: Date | null;
 }
 
-const DateTimePicker: FC<Props> = ({show, mode, onChange, value}) => {
+const DateTimePicker: FC<Props> = ({show, mode, onChange, value, onCancel}) => {
   const date = value ? value : new Date();
 
-  if (show) {
-    return (
-      <RNDateTimePicker
-        testID="dateTimePicker"
-        value={date}
-        mode={mode as any}
-        is24Hour={false}
-        onChange={onChange}
-      />
-    );
-  }
-
-  return null;
+  return (
+    <DateTimePickerModal
+      isVisible={show}
+      mode={mode}
+      is24Hour={false}
+      onConfirm={onChange}
+      onCancel={onCancel}
+      isDarkModeEnabled
+      textColor={COLORS.Primary_Input}
+      backdropStyleIOS={{backgroundColor: COLORS.Secondary_Modal}}
+      buttonTextColorIOS={COLORS.Primary_Button[0]}
+      pickerContainerStyleIOS={{backgroundColor: COLORS.Primary_Card}}
+      date={date}
+    />
+  );
 };
 
 export default memo(DateTimePicker);

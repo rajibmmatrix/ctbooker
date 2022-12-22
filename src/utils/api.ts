@@ -25,7 +25,7 @@ API.interceptors.response.use(
   async function (error) {
     let message;
     if (error.response) {
-      if (error.response.status === '401') {
+      if (error.response.status === 401) {
         removeApiToken();
         await deleteToken();
         navigation.reset('Auth');

@@ -60,7 +60,6 @@ const Calendars: FC<Props> = ({show, onClose, onDayPress, ...props}) => {
     <Modal visible={show} onRequestClose={onClose} transparent={true}>
       <View style={styles.container}>
         <Calendar
-          initialDate="12/15/2022"
           hideExtraDays={true}
           monthFormat={'d MMMM yyyy'}
           onDayPress={onDayPress}

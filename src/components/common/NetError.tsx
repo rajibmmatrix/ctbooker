@@ -2,9 +2,11 @@ import React, {FC, memo, useEffect, useState} from 'react';
 import {Image, Modal, StyleSheet, Text, View} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {IMAGES} from '~constants';
+import {useTranslations} from '~translation';
 import {COLORS, FONTS, fontSize, SIZES, _styles} from '~styles';
 
 const NetError: FC = () => {
+  const {translation} = useTranslations();
   const [isConnected, setIsConnected] = useState<boolean>(true);
 
   useEffect(() => {
@@ -21,13 +23,9 @@ const NetError: FC = () => {
       animationType="fade"
       style={_styles.container}>
       <View style={styles.container}>
-        <View style={styles.content}>
-          <Image source={IMAGES.NoInternet} style={styles.logo} />
-          <Text style={styles.title}>No connection</Text>
-          <Text style={styles.description}>
-            Please check your internet connectivity and try again
-          </Text>
-        </View>
+        <Image source={IMAGES.NoInternet} style={styles.logo} />
+        <Text style={styles.title}>{translation.no_connection}</Text>
+        <Text style={styles.description}>{translation.internet_error}</Text>
       </View>
     </Modal>
   );
@@ -40,14 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: SIZES.H22 * 1.5,
-    backgroundColor: COLORS.Secondary_Modal,
-  },
-  content: {
-    width: '100%',
-    padding: SIZES.V15,
-    paddingHorizontal: SIZES.H38,
-    borderRadius: 10,
+    paddingHorizontal: SIZES.H38 * 1.5,
     backgroundColor: COLORS.Primary_Background[0],
   },
   logo: {

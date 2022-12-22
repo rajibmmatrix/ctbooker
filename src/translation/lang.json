@@ -57,7 +57,9 @@
         "max_characters": "Max 250 caractères",
         "booking_history": "Booking history",
         "service_type": "Type de service",
-        "car_details": "Car détails"
+        "car_details": "Car détails",
+        "no_connection": "Pas de connection",
+        "internet_error": "Veuillez vérifier votre connexion Internet et réessayer."
     },
     "en": {
         "login_title": "Sign up for a unique experience",
@@ -117,6 +119,8 @@
         "max_characters": "Max 250 characters",
         "booking_history": "Booking history",
         "service_type": "Service type",
-        "car_details": "Car details"
+        "car_details": "Car details",
+        "no_connection": "No connection",
+        "internet_error": "Please check your internet connectivity and try again."
     }
 }
