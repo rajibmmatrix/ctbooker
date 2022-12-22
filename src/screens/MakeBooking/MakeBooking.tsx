@@ -48,10 +48,13 @@ export default function MakeBookingScreen({
   useLayoutEffect(() => {
     if (type === 'Technical Control') {
       setTitle(translation.technical_control_title);
+      setForm(prev => ({...prev, booking_type: 'technical'}));
     } else if (type === 'Against Visit') {
       setTitle(translation.against_visit_title);
+      setForm(prev => ({...prev, booking_type: 'control'}));
     } else {
       setTitle(translation.car_repair_title);
+      setForm(prev => ({...prev, booking_type: 'repair'}));
     }
     return () => setTitle('');
   }, [type, translation]);
