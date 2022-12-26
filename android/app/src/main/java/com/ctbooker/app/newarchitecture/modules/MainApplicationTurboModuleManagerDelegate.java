@@ -1,4 +1,4 @@
-package com.ctbooker.newarchitecture.modules;
+package com.ctbooker.app.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

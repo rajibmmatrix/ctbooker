@@ -1,4 +1,4 @@
-package com.ctbooker.newarchitecture.components;
+package com.ctbooker.app.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

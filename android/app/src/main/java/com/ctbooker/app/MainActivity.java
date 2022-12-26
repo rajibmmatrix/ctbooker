@@ -1,4 +1,4 @@
-package com.ctbooker;
+package com.ctbooker.app;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
