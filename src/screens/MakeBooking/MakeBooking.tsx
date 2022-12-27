@@ -18,7 +18,7 @@ import {
 } from '~components';
 import {Icons} from '~constants';
 import {useTranslations} from '~translation';
-import {loading, useDispatch} from '~app';
+import {addBooking, loading, useDispatch} from '~app';
 import {COLORS, FONTS, fontSize, SIZES} from '~styles';
 import {ICBooking, SideScreenProps} from 'types';
 
@@ -33,6 +33,10 @@ const params: ICBooking = {
   insurance_attachment: '',
   graycard_attachment: '',
   techcontrol_attachment: '',
+  pickup_latitude: '22.489810',
+  pickup_longitude: '88.336110',
+  drop_latitude: '22.489810',
+  drop_longitude: '88.336110',
 };
 
 export default function MakeBookingScreen({
@@ -61,6 +65,35 @@ export default function MakeBookingScreen({
     }
     return () => setTitle('');
   }, [type, translation]);
+
+  const handleAddBooking = () => {
+    let formData = new FormData();
+    formData.append('booking_type', form.booking_type);
+    formData.append('datetime', form.datetime);
+    formData.append('pickuptime', form.pickuptime);
+    formData.append('pickup_address', form.pickup_address);
+    formData.append('pickup_latitude', form.pickup_latitude);
+    formData.append('pickup_longitude', form.pickup_longitude);
+    formData.append('drop_address', form.drop_address);
+    formData.append('drop_latitude', form.drop_latitude);
+    formData.append('drop_longitude', form.drop_longitude);
+    formData.append('same_address', form.same_address);
+    formData.append('insurance_attachment', form.insurance_attachment);
+    formData.append('graycard_attachment', form.graycard_attachment);
+    formData.append('techcontrol_attachment', form.techcontrol_attachment);
+    formData.append(
+      'terms_conditions_verified',
+      form.terms_conditions_verified,
+    );
+
+    dispatch(loading(true));
+    dispatch(addBooking(form))
+      .unwrap()
+      .then(() => {
+        navigation.navigate('Tab', {screen: 'Booking'});
+      })
+      .finally(() => dispatch(loading(false)));
+  };
 
   return (
     <Container>
@@ -158,15 +191,7 @@ export default function MakeBookingScreen({
             }));
           }}
         />
-        <TouchableOpacity
-          onPress={() => {
-            dispatch(loading(true));
-            setTimeout(() => {
-              dispatch(loading(false));
-              navigation.navigate('Tab', {screen: 'Booking'});
-            }, 1500);
-          }}
-          style={styles.button}>
+        <TouchableOpacity onPress={handleAddBooking} style={styles.button}>
           <Text style={styles.buttonTitle}>{translation.next}</Text>
         </TouchableOpacity>
         <RadioButton

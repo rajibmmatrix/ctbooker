@@ -3,7 +3,7 @@ import config from '~config';
 import {URL} from '~constants';
 import {deleteToken} from './storage';
 import * as navigation from './navigationRef';
-import {IForgot, ILogin, ISignup} from 'types';
+import {ICBooking, IForgot, ILogin, ISignup} from 'types';
 
 const API = axios.create({
   baseURL: config.baseURL,
@@ -59,5 +59,9 @@ export const getUser = () => API.get(URL.getUser);
 export const signIn = (params: ILogin) => API.post(URL.login, params);
 export const signUp = (params: ISignup) => API.post(URL.signup, params);
 export const forgot = (params: IForgot) => API.post(URL.forgot, params);
+
+//Bookings API
+export const addBooking = (params: ICBooking) =>
+  API.post(URL.add_booking, params);
 
 export default API;

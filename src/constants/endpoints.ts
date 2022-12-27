@@ -12,4 +12,7 @@ export const URL = {
   login: '/api/v1/auth/login',
   signup: '/api/v1/auth/signup',
   forgot: '/api/v1/auth/forgot-password',
+
+  //Bookings
+  add_booking: '/api/v1/booking/add-booking',
 };

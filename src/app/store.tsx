@@ -6,11 +6,13 @@ import {
 import {configureStore} from '@reduxjs/toolkit';
 import loadingReducer from './features/loading/loadingSlice';
 import authReducer from './features/auth/authSlice';
+import bookingReducer from './features/booking/bookingSlice';
 
 export const store = configureStore({
   reducer: {
     loading: loadingReducer,
     auth: authReducer,
+    booking: bookingReducer,
   },
 });
 
