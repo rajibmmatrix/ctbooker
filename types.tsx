@@ -114,6 +114,9 @@ export interface ICBooking {
   drop_longitude?: string;
   same_address: boolean;
   terms_conditions_verified: boolean;
+  insurance_attachment: string;
+  graycard_attachment: string;
+  techcontrol_attachment: string;
 }
 
 export interface ITranslation {

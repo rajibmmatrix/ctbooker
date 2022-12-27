@@ -1,31 +1,44 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {SvgProps} from 'react-native-svg';
-import {useTranslations} from '~translation';
+import type {Asset} from 'react-native-image-picker';
+import type {SvgProps} from 'react-native-svg';
+import {ImagePicker} from '~common';
 import {Icons} from '~constants';
+import {useTranslations} from '~translation';
 import {COLORS, FONTS, fontSize, SIZES, _styles} from '~styles';
 
 interface Props {
   Icon: FC<SvgProps>;
   title: string;
-  onPress?: () => void;
+  onChose: (image: Asset) => void;
 }
 
-const BookingFileUpload: FC<Props> = ({Icon, title, onPress}) => {
+const BookingFileUpload: FC<Props> = ({Icon, title, onChose}) => {
   const {translation} = useTranslations();
+  const [showPicker, setShowPicker] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <View style={_styles.rowCenter}>
-        <Icon width={20} height={20} />
-        <Text style={styles.title}>{title}</Text>
+    <>
+      <View style={styles.container}>
+        <View style={_styles.rowCenter}>
+          <Icon width={20} height={20} />
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => setShowPicker(true)}
+          style={styles.button}>
+          <Icons.DirectSend />
+          <Text style={styles.buttonTitle}>{translation.attachments}</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={onPress} style={styles.button}>
-        <Icons.DirectSend />
-        <Text style={styles.buttonTitle}>{translation.attachments}</Text>
-      </TouchableOpacity>
-    </View>
+      <ImagePicker
+        title={title}
+        show={showPicker}
+        onChose={onChose}
+        onClose={() => setShowPicker(false)}
+      />
+    </>
   );
 };
 

@@ -8,4 +8,7 @@ export const IMAGES = {
   Booking: require('../assets/images/booking.png'),
   Tabbar: require('../assets/images/tabbar.png'),
   NoInternet: require('../assets/images/no-internet.png'),
+  Camera: require('../assets/images/camera.png'),
+  Gallery: require('../assets/images/photo-gallery.png'),
+  Close: require('../assets/images/close-window.png'),
 };

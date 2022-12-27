@@ -30,6 +30,9 @@ const params: ICBooking = {
   drop_address: '',
   same_address: false,
   terms_conditions_verified: false,
+  insurance_attachment: '',
+  graycard_attachment: '',
+  techcontrol_attachment: '',
 };
 
 export default function MakeBookingScreen({
@@ -134,14 +137,26 @@ export default function MakeBookingScreen({
         <BookingFileUpload
           Icon={Icons.ShieldTick}
           title={translation.insurance_card_number}
+          onChose={image => {
+            setForm(prev => ({...prev, insurance_attachment: image?.base64!}));
+          }}
         />
         <BookingFileUpload
           Icon={Icons.CalendarTick}
           title={translation.gray_card}
+          onChose={image => {
+            setForm(prev => ({...prev, graycard_attachment: image?.base64!}));
+          }}
         />
         <BookingFileUpload
           Icon={Icons.CPU}
           title={translation.valid_technical_control}
+          onChose={image => {
+            setForm(prev => ({
+              ...prev,
+              techcontrol_attachment: image?.base64!,
+            }));
+          }}
         />
         <TouchableOpacity
           onPress={() => {
