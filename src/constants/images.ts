@@ -11,4 +11,5 @@ export const IMAGES = {
   Camera: require('../assets/images/camera.png'),
   Gallery: require('../assets/images/photo-gallery.png'),
   Close: require('../assets/images/close-window.png'),
+  NoData: require('../assets/images/no_data.png'),
 };

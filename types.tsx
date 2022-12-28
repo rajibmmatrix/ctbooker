@@ -180,4 +180,5 @@ export interface ITranslation {
   car_details: string;
   no_connection: string;
   internet_error: string;
+  no_data: string;
 }

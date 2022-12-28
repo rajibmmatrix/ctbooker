@@ -59,7 +59,8 @@
         "service_type": "Type de service",
         "car_details": "Car détails",
         "no_connection": "Pas de connection",
-        "internet_error": "Veuillez vérifier votre connexion Internet et réessayer."
+        "internet_error": "Veuillez vérifier votre connexion Internet et réessayer.",
+        "no_data": "Aucune donnée disponible"
     },
     "en": {
         "login_title": "Sign up for a unique experience",
@@ -121,6 +122,7 @@
         "service_type": "Service type",
         "car_details": "Car details",
         "no_connection": "No connection",
-        "internet_error": "Please check your internet connectivity and try again."
+        "internet_error": "Please check your internet connectivity and try again.",
+        "no_data": "No data found"
     }
 }

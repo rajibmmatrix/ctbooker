@@ -15,4 +15,5 @@ export const URL = {
 
   //Bookings
   add_booking: '/api/v1/booking/add-booking',
+  get_bookings: '/api/v1/booking/get-bookings',
 };

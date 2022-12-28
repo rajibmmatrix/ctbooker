@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {addBooking} from './bookingAction';
+import {addBooking, getBookings} from './bookingAction';
 import {ICBooking} from 'types';
 
 export interface IBooking extends ICBooking {
@@ -22,6 +22,13 @@ export const bookingSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    builder.addCase(
+      getBookings.fulfilled,
+      (state: BookingState, action: PayloadAction<IBooking[]>) => {
+        state.bookings = action.payload;
+        state.error = null;
+      },
+    );
     builder.addCase(
       addBooking.fulfilled,
       (state: BookingState, action: PayloadAction<IBooking>) => {

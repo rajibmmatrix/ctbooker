@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {BackHeader, BookingCard, Container} from '~components';
+import {BackHeader, BookingCard, Container, NoDataFound} from '~components';
 import {useTranslations} from '~translation';
+import {getBookings, loading, useDispatch, useSelector} from '~app';
 import {SIZES} from '~styles';
 import {SideScreenProps} from 'types';
 
 export default function BookingResumeScreen({}: SideScreenProps<'BookingResume'>) {
+  const dispatch = useDispatch();
   const {translation} = useTranslations();
 
-  const data = [
+  const {bookings} = useSelector(state => state.booking);
+
+  useEffect(() => {
+    dispatch(loading(true));
+    dispatch(getBookings()).finally(() => dispatch(loading(false)));
+
+    return () => {};
+  }, [dispatch]);
+
+  /* const data = [
     {
       date: '23.11.2022',
       type: translation.technical_control,
@@ -24,25 +35,35 @@ export default function BookingResumeScreen({}: SideScreenProps<'BookingResume'>
       type: translation.technical_control,
       details: 'Mauris eu risus felis. Integer',
     },
-  ];
+  ]; */
 
   return (
     <Container>
       <BackHeader title={translation.booking_history} />
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={({item}) => (
-            <BookingCard
-              date={item.date}
-              type={item.type}
-              details={item.details}
-            />
-          )}
-          keyExtractor={(_, index) => index.toString()}
-          style={styles.body}
-        />
-      </View>
+      {bookings.length ? (
+        <View style={styles.container}>
+          <FlatList
+            data={bookings}
+            renderItem={({item}) => (
+              <BookingCard
+                date={item?.datetime?.toLocaleString()!}
+                type={
+                  item?.booking_type === 'technical'
+                    ? translation.technical_control
+                    : item?.booking_type === 'control'
+                    ? translation.against_visit
+                    : translation.car_repair
+                }
+                details={item?.pickup_address}
+              />
+            )}
+            keyExtractor={(_, index) => index.toString()}
+            style={styles.body}
+          />
+        </View>
+      ) : (
+        <NoDataFound />
+      )}
     </Container>
   );
 }

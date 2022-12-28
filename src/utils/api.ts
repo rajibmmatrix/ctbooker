@@ -30,7 +30,7 @@ API.interceptors.response.use(
         await deleteToken();
         navigation.reset('Auth');
       }
-      message = error.response.data?.message;
+      message = error.response.data?.message || error?.message;
     } else {
       message = error.message;
     }
@@ -63,5 +63,6 @@ export const forgot = (params: IForgot) => API.post(URL.forgot, params);
 //Bookings API
 export const addBooking = (params: ICBooking) =>
   API.post(URL.add_booking, params);
+export const getBookings = () => API.get(URL.get_bookings);
 
 export default API;
