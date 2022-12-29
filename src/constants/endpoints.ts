@@ -12,6 +12,9 @@ export const URL = {
   login: '/api/v1/auth/login',
   signup: '/api/v1/auth/signup',
   forgot: '/api/v1/auth/forgot-password',
+  edit_profile: '/api/v1/auth/edit-profile',
+  edit_profilePic: '/api/v1/auth/profile-img',
+  change_password: '/api/v1/auth/change-password',
 
   //Bookings
   add_booking: '/api/v1/booking/add-booking',

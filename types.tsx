@@ -102,6 +102,28 @@ export interface ISignup {
   password: string;
 }
 
+export interface ICPassword {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
+export interface IPPic {
+  profile: string;
+}
+
+export interface IUserEdit {
+  company_name?: string;
+  crn?: string;
+  first_name?: string;
+  last_name?: string;
+  customer_type?: '0' | '1' | string;
+  address?: string;
+  phone?: string;
+  latitude?: string;
+  longitude?: string;
+}
+
 export interface ICBooking {
   booking_type: 'technical' | 'control' | 'repair' | string;
   datetime: Date | null | string;

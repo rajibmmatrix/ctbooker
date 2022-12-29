@@ -1,6 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {checkLogin, getUser, login, logout, signup, forgot} from './authAction';
+import {
+  checkLogin,
+  getUser,
+  login,
+  logout,
+  signup,
+  forgot,
+  editProfilePic,
+  editProfile,
+} from './authAction';
 
 export interface IUser {
   id?: number;
@@ -57,6 +66,20 @@ export const authSlice = createSlice({
       state.user = action.payload;
       state.error = null;
     });
+    builder.addCase(
+      editProfile.fulfilled,
+      (state: AuthState, action: PayloadAction<IUser>) => {
+        state.user = action.payload;
+        state.error = null;
+      },
+    );
+    builder.addCase(
+      editProfilePic.fulfilled,
+      (state: AuthState, action: PayloadAction<IUser>) => {
+        state.user = action.payload;
+        state.error = null;
+      },
+    );
     builder.addCase(
       logout.fulfilled,
       (state: AuthState, action: PayloadAction<boolean>) => {
