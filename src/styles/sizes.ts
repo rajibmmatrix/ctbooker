@@ -7,6 +7,10 @@ export const screenWidth = Dimensions.get('window').width;
 
 export const screenHeight = Dimensions.get('window').height;
 
+console.log({screenHeight});
+
+export const isIOS = Platform.OS === 'ios' && screenHeight > 800;
+
 export const widthDP = (widthPercent: any) => {
   const elemWidth = parseFloat(widthPercent); // Convert string input to decimal number
   return PixelRatio.roundToNearestPixel((screenWidth * elemWidth) / 100);

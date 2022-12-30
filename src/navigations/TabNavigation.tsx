@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BookingScreen, HomeScreen, AccountScreen} from '~screens';
 import {CustomBottom} from '~components';
 import {Icons} from '~constants';
-import {COLORS, FONTS, _styles} from '~styles';
 import {useTranslations} from '~translation';
+import {COLORS, FONTS, isIOS, SIZES, _styles} from '~styles';
 import {TabParamList} from 'types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -21,6 +21,9 @@ export default function Tabs() {
           backgroundColor: 'transparent',
           borderTopWidth: 0,
           elevation: 0,
+          position: isIOS ? 'absolute' : 'relative',
+          paddingTop: isIOS ? SIZES.H10 : 0,
+          bottom: isIOS ? -SIZES.H10 : 0,
         },
         tabBarLabelStyle: {
           fontSize: 11,
@@ -29,6 +32,8 @@ export default function Tabs() {
           fontFamily: FONTS.Primary_Medium,
           color: COLORS.Light,
           textAlign: 'center',
+          position: isIOS ? 'absolute' : 'relative',
+          bottom: isIOS ? -SIZES.H10 : 0,
         },
       }}>
       <Tab.Screen
